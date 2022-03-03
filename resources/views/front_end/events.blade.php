@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('title','Events')
 @section('content')
 
 <article class="inner-banner">

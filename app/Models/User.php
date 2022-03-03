@@ -22,6 +22,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'mobile','address'
     ];
 
     /**
@@ -47,5 +48,26 @@ class User extends Authenticatable
     public function subscription() {
         return $this->hasMany(Subcription::class)->whereDate('end_time', '>', Carbon::now());
 
+    }
+
+    public function subs() {
+        return $this->hasOne(Subcription::class)->whereDate('end_time', '>', Carbon::now());
+
+    }
+
+
+    public function sub() {
+        return $this->belongsTo(Subcription::class)->whereDate('end_time', '>', Carbon::now());
+    }
+
+
+    public function bookings() {
+        return $this->hasMany(Booking::class,'user_id','id');
+    }
+
+    public function posts() {
+  
+        return $this->hasMany(Post::class);
+     
     }
 }

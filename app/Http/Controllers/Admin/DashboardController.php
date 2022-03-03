@@ -3,8 +3,16 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Booking;
 use App\Models\Category;
+use App\Models\Package;
+use App\Models\Subcription;
+use App\Models\Transcation;
+use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use SebastianBergmann\CodeCoverage\Report\Xml\Totals;
 
 class DashboardController extends Controller
 {
@@ -17,7 +25,26 @@ class DashboardController extends Controller
     {
         //
 
-        return view('backend.dashboard.index');
+
+
+       $users = User::all()->count();
+       $packages = Package::all()->count();
+
+        $subscriptions = Subcription::all()->count();
+
+  $total =       DB::table("transcations")->get()->sum("amount");
+
+ // return Carbon::today();
+
+     $bookings = Booking::with(['user','location','package'])->where('slot_date',Carbon::today())->get();
+
+
+    //$la  = Subcription::whereMonth('create_at','=',Carbon::now())
+              //   return Carbon::now()->month();
+
+         
+
+        return view('backend.dashboard.index',compact('users','packages','subscriptions','total','bookings'));
     }
 
     /**

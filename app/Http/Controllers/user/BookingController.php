@@ -4,8 +4,11 @@ namespace App\Http\Controllers\user;
 
 use App\Http\Controllers\Controller;
 use App\Models\Booking;
+use App\Models\Location;
 use App\Models\Package;
 use App\Models\Price;
+use App\Models\Subcription;
+use App\Models\User;
 use Carbon\Carbon;
 
 use Illuminate\Http\Request;
@@ -24,10 +27,11 @@ class BookingController extends Controller
     {
         //
 
-        $packages = Package::with(['price'])->get();
+        $packages = Package::with(['price'])->where('name','!=','video')->get();
+        $locations = Location::all();
+        //$dashboards  =  User::with(['subscription'])->find(Auth::user()->id);
 
-
-        return view('user.book',compact('packages'));
+        return view('user.book',compact('packages','locations'));
     }
 
     /**
@@ -60,25 +64,35 @@ class BookingController extends Controller
         // $booking->price_id  = $request->type;
      //   DB::enableQueryLog();
 
+
+   
+
          $ifbooking = Booking::whereDate('slot_date','=', Carbon::parse($request->start_date)->format('Y-m-d'))->
-         where()->count();
+         where('slot_time','=',$request->start_time)->where('package_id','=',$request->package)->count();
+    
    // $query =  DB::getQueryLog();
 
    if($ifbooking == config('app.value')) {
        return response()->json(['status'=>1,'message'=> 'Sorry Slot Already Taken'],200);
    } else {
+        $subscription = Subcription::where('user_id','=',Auth::user()->id)->whereDate('end_time', '>', Carbon::now())
+    ->first();
     $booking = new Booking();
-              $booking->user_id = 1;
+              $booking->user_id = Auth::user()->id;
               $booking->slot_date = Carbon::parse($request->start_date)->format('Y-m-d');
               $booking->slot_time =  $request->start_time;
               $booking->package_id = $request->package;
               $booking->price_id  = $request->type;
+              $booking->subscription_id = $subscription->id;
+              $booking->location_id = $request->location_id;
              if($booking->save()) {
-                // return 2;
+                 
                 return response()->json(['status'=>2,'message'=> 'Successfully Booked your Slot'],200);
              }else {
                    return response()->json(['status'=>3,'message'=> 'Sorry Some Error'],200);
              }
+
+             
    }
 
 

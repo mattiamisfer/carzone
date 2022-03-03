@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+ use Illuminate\Http\Request;
+ use Illuminate\Support\Facades\Session;
 
+ 
 class HomeController extends Controller
 {
     /**
@@ -46,7 +48,32 @@ class HomeController extends Controller
         return view('front_end.contact');
     }
 
-    public function proceed() {
+    public function store() {
+       return redirect()->back();
+    }
+
+    public function proceed($id,$type) {
+
+        $id = Session::put('plan_id',$id);
+        $type = Session::put('type',$type);
+
+
+      
         return view('front_end.proceed');
     }
+
+
+
+    public function refund() {
+        return view('front_end.refund');
+    }
+
+    public function terms() {
+        return view('front_end.refund');
+    }
+
+    public function privacy() {
+        return view('front_end.privacy');
+    }
+
 }

@@ -35,6 +35,18 @@
                         <div class="dropdown-divider"></div>	<a class="dropdown-item" href="javascript:;">Separated link</a>
                     </div> --}}
 
+                    @if (Session::has('success'))
+
+                    <div class="alert alert-success" role="alert">
+                      {{ Session::get('success') }}
+                    </div>
+                    @endif
+                    @if (Session::has('failure'))
+                    <div class="alert alert-danger" role="alert">
+                      {{ Session::get('failure') }}
+                    </div>
+                 @endif
+
 
                 </div>
             </div>
@@ -62,6 +74,7 @@
                         <thead>
                             <tr>
                                 <th>Name</th>
+                                <th>Options</th>
                                 <th>Edit</th>
                                 <th>Delete</th>
 
@@ -74,6 +87,23 @@
                             @foreach ($packages as $package)
                             <tr>
                                 <td>{{ $package->name}}</td>
+
+
+
+                                <td><a href="{{ route('admin.option.index',$package->id)}}" class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+                                    <div class="font-22 text-primary">	<i class="fadeIn animated bx bx-plus"></i>
+                                    </div>
+                                    <div class="ms-2">Add Option</div>
+                                </a></td>
+
+
+
+
+
+
+
+
+
                                 <td><a href="{{ route('admin.package.edit',$package->id)}}" class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
                                     <div class="font-22 text-primary">	<i class="fadeIn animated bx bx-message-edit"></i>
                                     </div>

@@ -35,10 +35,20 @@ class PlansController extends Controller
         $fields = collect([
             [
 
-                'label' => 'Plan Name',
+                'label' => 'Package Name',
                 'name' => 'plan_name',
                 'icon' => true,
                 'icon_name' => 'box',
+                'type' => 'text',
+                'validate' =>  true
+
+            ],
+            [
+                'label' => 'Num of Times',
+                'name' => 'times',
+                'icon' => true,
+                'icon_name' => ' bx-time',
+                'list' =>  null,
                 'type' => 'text',
                 'validate' =>  true
 
@@ -66,13 +76,13 @@ class PlansController extends Controller
                 'list' => [
                     [
                         'id' => 1,
-                        'name' => '1 month',
-                        'validity' => '1 month'
+                        'name' => '1 year',
+                        'validity' => '12'
                     ],
                     [
                         'id' => 2,
-                        'name' => '2 month',
-                        'validity' => '2 month'
+                        'name' => '2 Year',
+                        'validity' => '24'
                     ]
                 ]
 
@@ -88,6 +98,7 @@ class PlansController extends Controller
                 'validate' =>  true
 
             ],
+          
 
 
         ]
@@ -110,12 +121,14 @@ class PlansController extends Controller
             'input_amount' => 'required|numeric|between:50,50000.99',
             'input_validity' => 'required',
             'input_description' => 'required',
+            'input_times' => 'required|numeric',
         ],
         [
-            'input_plan_name.required'=> 'Plan Name is Required', // custom message
+            'input_plan_name.required'=> 'Package Name is Required', // custom message
             'input_amount.required'=> 'Amount is Required',
             'input_validity.required'=> 'Validity is Required',
             'input_description.required'=> 'Description is Required',
+            'input_times.required'=> 'Number of Times is Required',
            ]
         );
 
@@ -127,6 +140,7 @@ class PlansController extends Controller
         $plan->amount = $request->input_amount;
         $plan->description = $request->input_description;
         $plan->duration = $request->input_validity;
+        $plan->times = $request->input_times;
         if($plan->save()) {
 
             // return 2;
@@ -167,7 +181,7 @@ class PlansController extends Controller
         $fields = collect([
             [
 
-                'label' => 'Plan Name',
+                'label' => 'Package Name',
                 'name' => 'plan_name',
                 'icon' => true,
                 'icon_name' => 'box',
@@ -175,6 +189,17 @@ class PlansController extends Controller
                 'validate' =>  true,
                 'value' => $plans->name,
 
+            ],
+
+            [
+                'label' => 'Num of Times',
+                'name' => 'times',
+                'icon' => true,
+                'icon_name' => ' bx-time',
+                'list' =>  null,
+                'type' => 'text',
+                'validate' =>  true,
+                'value' => $plans->times,
             ],
             [
 
@@ -199,26 +224,18 @@ class PlansController extends Controller
                 'validate' =>  true,
                 'value' => $plans->duration,
                 'list' => [
+                    
                     [
                         'id' => 1,
-                        'name' => '1 month',
-                        'validity' => '1 month'
+                        'name' => '1 year',
+                        'validity' => '12'
                     ],
                     [
                         'id' => 2,
-                        'name' => '2 month',
-                        'validity' => '2 month'
-                    ],
-                    [
-                        'id' => 3,
-                        'name' => '3 month',
-                        'validity' => '3 month'
-                    ],
-                    [
-                        'id' => 4,
-                        'name' => '6 month',
-                        'validity' => '6 month'
-                    ],
+                        'name' => '2 Year',
+                        'validity' => '24'
+                    ]
+                   
                 ]
 
             ],
@@ -258,12 +275,14 @@ class PlansController extends Controller
             'input_amount' => 'required|numeric|between:50,50000.99',
             'input_validity' => 'required',
             'input_description' => 'required',
+            'input_times' => 'required|numeric',
         ],
         [
             'input_plan_name.required'=> 'Plan Name is Required', // custom message
             'input_amount.required'=> 'Amount is Required',
             'input_validity.required'=> 'Validity is Required',
             'input_description.required'=> 'Description is Required',
+            'input_times.required'=> 'Number of Times is Required',
            ]
         );
 
@@ -275,6 +294,7 @@ class PlansController extends Controller
         $plan->amount = $request->input_amount;
         $plan->description = $request->input_description;
         $plan->duration = $request->input_validity;
+        $plan->times = $request->input_times;
         if($plan->save()) {
 
             // return 2;

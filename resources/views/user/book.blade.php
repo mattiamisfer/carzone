@@ -1,4 +1,8 @@
-@extends('user.index')
+@extends('layouts.user')
+@section('headerSection')
+
+
+@endsection
 @section('content')
 <section class="main_content dashboard_part">
     <!-- menu  -->
@@ -16,23 +20,33 @@
                     </div>
                 <div class="header_right d-flex justify-content-between align-items-center">
                     <div class="header_notification_warp d-flex align-items-center">
-                        <li>
+                        {{-- <li>
                             <a href="#"> <img src="img/icon/bell.svg" alt=""> </a>
                         </li>
                         <li>
                             <a href="#"> <img src="img/icon/msg.svg" alt=""> </a>
-                        </li>
+                        </li> --}}
                     </div>
                     <div class="profile_info">
-                        <img src="img/client_img.png" alt="#">
+                        <img src="{{ asset('assets/profile.png')}}" alt="#">
                         <div class="profile_info_iner">
-                            <p>Welcome Admin!</p>
-                            <h5>Travor James</h5>
+                            <p>Welcome User!</p>
+                            <h5>@auth
+                                {{Auth::user()->name}}
+                            @endauth</h5>
                                <div class="profile_info_details">
-                                  <a href="#">View Profile <i class="ti-user"></i></a>
-                                  <a href="#">Edit Profile <i class="ti-settings"></i></a>
-                                  <a href="#">Change Password <i class="ti-settings"></i></a>
-                                  <a href="#">Log Out <i class="ti-shift-left"></i></a>
+                                <a href="{{ route('user.profile')}}">Edit Profile <i class="ti-settings"></i></a>
+
+                                {{-- <a href="#">Change Password <i class="ti-settings"></i></a> --}}
+                                <a href="{{ route('logout')}}"
+                                onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();"
+                                >Log Out <i class="ti-shift-left"></i></a>
+
+
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
                               </div>
                         </div>
                     </div>
@@ -51,7 +65,7 @@
                   <div class="white_box mb_30">
                       <div class="input_wrap common_date_picker mb_20">
                           <label for="#">Start date</label>
-                          <input name="start_date" class="input_form" id="start_datepicker" placeholder="Pick a start date">
+                          <input name="start_date"  autocomplete="off" required class="input_form" id="start_datepicker" placeholder="Pick a start date">
                       </div>
                   </div>
               </div>
@@ -61,19 +75,41 @@
                 <div class="white_box mb_30">
                     <div class="input_wrap common_date_picker mb_20">
                         <label for="#">Start date</label>
-                <select name="start_time" id="start_time" class="form-control with-icon" data-validetta="required">
+                <select name="start_time" id="start_time" required class="form-control with-icon" data-validetta="required">
                     <option selected="" value="">Drop In Time</option>
-                    <option value="12:00 PM">12:00 PM</option><option value="12:30 PM">12:30 PM</option><option value="01:00 PM">01:00 PM</option><option value="01:30 PM">01:30 PM</option>
-                    <option value="02:00 PM">02:00 PM</option><option value="02:30 PM">02:30 PM</option>
-
-
-                    <option value="05:30 PM">05:30 PM</option><option value="06:00 PM">06:00 PM</option><option value="06:30 PM">06:30 PM</option><option value="07:00 PM">07:00 PM</option><option value="07:30 PM">07:30 PM</option><option value="08:00 PM">08:00 PM</option><option value="08:30 PM">08:30 PM</option><option value="09:00 PM">09:00 PM</option><option value="09:30 PM">09:30 PM</option><option value="10:00 PM">10:00 PM</option>
+                    <option value="9:00AM - 10:00AM">9:00AM - 10:00AM</option>
+                    <option value="10:00AM - 11:00AM">10:00AM - 11:00AM</option>
+                    <option value="11:00AM - 12:00AM">11:00AM - 12:00AM</option>
+                    <option value="12:00NOON - 01:00PM">12:00NOON - 01:00PM</option>
+                    <option value="01:00PM - 02:00PM">01:00PM - 02:00PM</option>
+                    <option value="02:00PM - 03:00PM">02:00PM - 03:00PM</option>
+                    <option value="03:00PM - 04:00PM">03:00PM - 04:00PM</option>
+                    <option value="04:00PM - 05:00PM">04:00PM - 05:00PM</option>
+                    <option value="05:00PM - 06:00PM">05:00PM - 06:00PM</option>
+                    <option value="06:00PM - 07:00PM">06:00PM - 07:00PM</option>
+                    <option value="07:00PM - 08:00PM">07:00PM - 08:00PM</option>
+                    <option value="07:00PM - 08:00PM">07:00PM - 08:00PM</option>
+                 
                 </select>
                     </div>
                 </div>
               </div>
 
-
+              <div class="col-lg-4">
+                <div class="white_box mb_30">
+                    <div class="input_wrap common_date_picker mb_20">
+                        <label for="#">Location</label>
+                        <select name="location_id" id="location_id" class="form-control with-icon" required>
+                            <option>Choose Location</option>
+                            @foreach ($locations as $location)
+                            <option value="{{ $location->id}}">
+                                {{ $location->name}}</option>
+                                
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+              </div>
 
 
 
@@ -82,7 +118,7 @@
                   <div class="white_box mb_30">
                       <div class="input_wrap common_date_picker mb_20">
                           <label for="#">Service Station</label>
-                         <select class="form-control choose_time" name="package" id="package">
+                         <select class="form-control choose_time" name="package" id="package" required>
                              <option >Choose your Service station</option>
                              @foreach ($packages as  $package)
                              <option value="{{$package->id}}">{{$package->name}} </option>
@@ -121,13 +157,27 @@
   </div>
 
   @include('layouts.footer')
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script>
-    //  $.ajaxSetup({
-    //     headers: {
-    //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    //     }
-    // });
+  
+</section>
+@endsection
+
+
+@section('sectionFooter')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  
+  {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" /> --}}
+{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script> --}}
+ 
+ <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+ <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker3.min.css" integrity="sha512-rxThY3LYIfYsVCWPCW9dB0k+e3RZB39f23ylUYTEuZMDrN/vRqLdaCBo/FbvVT6uC2r0ObfPzotsfKF9Qc5W5g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker3.standalone.min.css" integrity="sha512-p4vIrJ1mDmOVghNMM4YsWxm0ELMJ/T0IkdEvrkNHIcgFsSzDi/fV7YxzTzb3mnMvFPawuIyIrHcpxClauEfpQg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+ 
+<script>
+  
+
+  
 
     $(".choose_time").change(function(e){
         $.ajaxSetup({
@@ -153,7 +203,7 @@
           // _token: '{{csrf_token()}}' ,
            data:{id:id},
            success:function(data){
-              alert(data.success);
+             // alert(data.success);
               console.log(data);
               var data = data.success;
               for (var i = 0; i < data.length; i++) {
@@ -178,7 +228,7 @@ var messagebox = $('#messagebox').hide();
 
     $('#butsave').on('click', function(e) {
 
-        e.preventDefault();
+      ///alert('post');
 
         $.ajaxSetup({
       headers: {
@@ -186,17 +236,19 @@ var messagebox = $('#messagebox').hide();
         }
     });
 
-
-		$("#butsave").attr("disabled", "disabled");
+    e.preventDefault();
+	//	$("#butsave").attr("disabled", "disabled");
+    var SITEURL = "{{ url('/') }}";
 		var start_date = $('#start_datepicker').val();
 		var start_time = $('#start_time').val();
 		var package = $('#package').val();
 		var type = $('#type').val();
+        var location_id = $('#location_id').val();
         var token = $('#token').val();
 
 
-        alert(start_date);
-		if(start_date!="" && start_time!="" && package!="" && type!=""){
+        //alert(start_date);
+		if(start_date!="" && start_time!="" && package!="" && type!="" && location_id!=""){
 			$.ajax({
 
 				url: "/user/booking",
@@ -207,20 +259,21 @@ var messagebox = $('#messagebox').hide();
 					start_time: start_time,
 					package: package,
 					type: type,
-                    token: token
+                    token: token,
+                    location_id:location_id
 				},
 				cache: false,
 
 				success: function(dataResult,responseText,xhr){
                     console.log(dataResult);
                     $("#butsave").removeAttr("disabled");
-
+                  //  alert('ajax post');
                     var result = JSON.stringify(dataResult);
 					 // var dataResult = JSON.parse(dataResult);
 					  if(xhr.status==200){
-
+                        messagebox.show();
                          if(dataResult.status ==1) {
-                             messagebox.show();
+                            
 
                              messagebox.html("<p style='color:red;'>"+ dataResult.message+" </p>");
 
@@ -239,7 +292,7 @@ var messagebox = $('#messagebox').hide();
 					// 	$('#success').html('Data added successfully !');
 					  }
 					  else if(dataResult.statusCode==201){
-					//    alert("Error occured !");
+				//    alert("Error occured !");
 					  }
 
 				}
@@ -250,5 +303,53 @@ var messagebox = $('#messagebox').hide();
 		}
 	});
     </script>
-</section>
+ 
+ <script>
+     
+        
+      var dateToday = new Date();  
+
+
+
+
+      var $j = jQuery.noConflict();
+
+      var unavailableDates = ["03-03-2022", "05-03-2022", "07-03-2022"];
+
+ 
+ 
+  
+
+$j(function() {
+   
+  
+$.ajaxSetup({
+    headers: {
+    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+  
+
+$.getJSON("/user/holiday", function(data, status){
+    
+   // alert("Data: " + data + "\nStatus: " + status);
+
+ 
+
+ 
+ 
+        $j("#start_datepicker").datepicker({
+            format: 'dd-mm-yyyy',
+            showOtherMonths: true,
+    selectOtherMonths: true,
+    autoclose: true,
+    changeMonth: true,
+    changeYear: true,
+    orientation: "bottom left",
+    datesDisabled:data,
+        });
+    });
+    });
+ 
+  </script>
 @endsection

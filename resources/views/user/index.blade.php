@@ -17,22 +17,25 @@
                     </div>
                 <div class="header_right d-flex justify-content-between align-items-center">
                     <div class="header_notification_warp d-flex align-items-center">
-                        <li>
+                        {{-- <li>
                             <a href="#"> <img src="img/icon/bell.svg" alt=""> </a>
                         </li>
                         <li>
                             <a href="#"> <img src="img/icon/msg.svg" alt=""> </a>
-                        </li>
+                        </li> --}}
                     </div>
                     <div class="profile_info">
-                        <img src="img/client_img.png" alt="#">
+                        <img src="{{ asset('assets/profile.png')}}" alt="#">
                         <div class="profile_info_iner">
-                            <p>Welcome Admin!</p>
-                            <h5>Travor James</h5>
+                            <p>Welcome User! </p>
+                            <h5> @auth
+                         {{        Auth::user()->name}}
+                            @endauth </h5>
                             <div class="profile_info_details">
-                                <a href="#">View Profile <i class="ti-user"></i></a>
-                                <a href="#">Edit Profile <i class="ti-settings"></i></a>
-                                <a href="#">Change Password <i class="ti-settings"></i></a>
+                                {{-- <a href="#">View Profile <i class="ti-user"></i></a> --}}
+                                <a href="{{ route('user.profile')}}">Edit Profile <i class="ti-settings"></i></a>
+
+                                {{-- <a href="#">Change Password <i class="ti-settings"></i></a> --}}
                                 <a href="{{ route('logout')}}"
                                 onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();"
@@ -59,30 +62,50 @@
                 <div class="single_element">
                     <div class="quick_activity">
                         <div class="row">
-                            <div class="col-12">
-                                <div class="quick_activity_wrap">
-                                    <div class="single_quick_activity">
-                                        <h4>Current Package</h4>
-                                        <h3>Silver </h3>
-                                        <p>Saved 25%</p>
-                                    </div>
-                                    <div class="single_quick_activity">
-                                        <h4>Upcoming Washes</h4>
-                                        <h3><span class="counter">10</span> </h3>
-                                        <p>Saved 25%</p>
-                                    </div>
-                                    <div class="single_quick_activity">
-                                        <h4>Total No. of washes</h4>
-                                        <h3><span class="counter">20</span> </h3>
-                                        <p>Saved 25%</p>
-                                    </div>
-                                    <div class="single_quick_activity">
-                                        <h4>Washes Remaining</h4>
-                                        <h3><span class="counter">10</span> </h3>
-                                        <p>Saved 65%</p>
-                                    </div>
+
+                           
+
+                           @if ($dashboards->subscription()->count())
+
+                           @foreach ($dashboards->subscription as  $data)
+
+                            
+                               
+                          
+
+                           <div class="col-12">
+                            <div class="quick_activity_wrap">
+                                <div class="single_quick_activity">
+                                    <h4>Current Package </h4>
+                                    <h3> 
+                                {{$data->plans->name}}
+                                     </h3>  
+                                    <p>Saved 25%</p>
+                                </div>
+                                <div class="single_quick_activity">
+                                    <h4>Upcoming Washes</h4>
+                                       <h3><span class="counter"> {{  $data->upcomming()->count()}}</span> </h3>  
+                                    <p>Saved 25%</p>
+                                </div>
+                                <div class="single_quick_activity">
+                                    <h4>Total No. of washes</h4>
+                                 <h3><span class="counter">{{$data->plans->times}}</span> </h3>   
+                                    <p>Saved 25%</p>
+                                </div>
+                                <div class="single_quick_activity">
+                                    <h4>Used </h4>  
+                                    <h3><span class="counter">{{  $data->booking()->count()}}</span> </h3>
+                                    <p>Saved 65%</p>
                                 </div>
                             </div>
+                        </div>
+                        @endforeach
+                           @else
+
+                          <h2>Sorry Your Package is Expired !!!</h2>
+                               
+                           @endif
+                   
                         </div>
                     </div>
                 </div>

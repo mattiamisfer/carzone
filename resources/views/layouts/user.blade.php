@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <title>Carwash Userportal</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
+    <link rel="icon" href="{{ asset('assets/images/favicon.png')}}" type="image/png" sizes="16x16">
     <!-- <link rel="icon" href="img/favicon.png" type="image/png"> -->
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{ asset('user/css/bootstrap.min.css')}}" />
@@ -42,6 +42,7 @@
     <!-- style CSS -->
     <link rel="stylesheet" href="{{ asset('user/css/style.css')}}" />
     <link rel="stylesheet" href="{{ asset('user/css/colors/default.css')}}" id="colorSkinCSS">
+    @yield('headerSection')
 </head>
 <body class="crm_body_bg">
 
@@ -62,7 +63,7 @@
         <li class="mm-active">
           <a class=""  href="{{ route('dashboard.index')}}"  aria-expanded="false">
          <img src="img/menu-icon/1.svg" alt="">
-            <span>Dashboard</span>
+            <span>Dashboard  </span>
           </a>
            </li>
 		<li class="mm-active">
@@ -72,7 +73,7 @@
           </a>
            </li>
 		<li class="mm-active">
-          <a class=""  href="transaction-history.html"  aria-expanded="false">
+          <a class=""  href="{{ route('user.transactions.index')}}"  aria-expanded="false">
        <img src="img/menu-icon/2.svg" alt="">
             <span>Transaction History</span>
           </a>
@@ -84,7 +85,7 @@
  <!--         </a>-->
  <!--          </li>-->
 		<li class="mm-active">
-          <a class=""  href="feedback.html"  aria-expanded="false">
+          <a class=""  href="{{ route('user.feedback')}}"  aria-expanded="false">
        <img src="img/menu-icon/6.svg" alt="">
             <span>Post feedback/comment</span>
           </a>
@@ -157,6 +158,8 @@
 <script src="{{ asset('user/vendors/apex_chart/bar_active_1.js')}}"></script>
 <script src="{{ asset('user/vendors/chartjs/chartjs_active.js')}}"></script>
 
+
+@yield('sectionFooter')
 
 </body>
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Transcation;
 use App\Models\User;
 use Closure;
 use Illuminate\Http\Request;
@@ -21,6 +22,9 @@ class UserAuthenticated
 
         if(Auth::check()) {
             $usercheck =  User::with(['subscription'])->find(Auth::user()->id);
+
+        //    return $check = Transcation::where('user_id','=',Auth::user()->id)->where('status','=','Success')
+        //     ->get();
 
             if($usercheck->subscription->count() ==1) {
 

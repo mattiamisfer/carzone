@@ -3,11 +3,16 @@
 namespace App\Providers;
 
 use App\Models\Category;
+use App\Models\User;
+use Illuminate\Contracts\Auth\Guard;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Schema;
 
 
 class AppServiceProvider extends ServiceProvider
+
 {
     /**
      * Register any application services.
@@ -24,11 +29,19 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(Guard $auth)
     {
         //
-        $categories = Category::with(['subcategory'])->get();
+        // Schema::defaultStringLength(191);
 
+         $categories = Category::all();
+       
         view()->share('categories',$categories);
+        View::composer('*', function ($view) use ($auth) {
+            $view->with('currentAuthenticatedUser', $auth->user());
+        });
+        
+           
+       
     }
 }

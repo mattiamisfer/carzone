@@ -5,7 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Package;
+use App\Models\Price;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\File;
 
 class PackageController extends Controller
 {
@@ -20,6 +23,8 @@ class PackageController extends Controller
 
 
         $packages = Package::all();
+
+        
 
         return view('backend.package.index',compact('packages'));
     }
@@ -112,10 +117,17 @@ class PackageController extends Controller
         );
 
 
+        $path = $request->file('input_image')->store('images','s3');
+
+        Storage::disk('s3')->setVisibility($path,'public');
+
+        
         $package = new Package();
 
+
+
         $package->name = $request->input_package_name;
-        $package->image = $request->input_image;
+        $package->image =  basename($path);
         $package->content = $request->input_content;
         $package->category_id = $request->input_category_name;
         if($package->save()) {
@@ -220,10 +232,27 @@ class PackageController extends Controller
     {
         //
 
+        
+
+
+        if($request->hasFile('input_image')) {
+
+
+          //   Storage::disk('s3')->delete('images/'.$request->already_exist);
+            $path = $request->file('input_image')->store('images','s3');
+
+        Storage::disk('s3')->setVisibility($path,'public');
+
+        $file = basename($path);
+
+        } else {
+           $file = $request->already_exist;
+        }
+
         $package = Package::find($id);
 
         $package->name = $request->input_package_name;
-        $package->image = $request->input_image;
+        $package->image = $file;
         $package->content = $request->input_content;
         $package->category_id = $request->input_category_name;
         if($package->save()) {
@@ -247,6 +276,7 @@ class PackageController extends Controller
 
 
         $package = Package::find($id);
+        Storage::disk('s3')->delete('images/'.$package->image);
         if($package->delete()) {
 
             // return 2;

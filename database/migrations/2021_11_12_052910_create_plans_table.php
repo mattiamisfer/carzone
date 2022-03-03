@@ -19,6 +19,7 @@ class CreatePlansTable extends Migration
             $table->decimal('amount', 5, 2);
             $table->text('description');
             $table->text('duration');
+            $table->bigInteger('times');
             $table->timestamps();
         });
     }

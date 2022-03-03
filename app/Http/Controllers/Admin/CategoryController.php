@@ -188,7 +188,7 @@ class CategoryController extends Controller
         if($delete->delete()) {
 
             // return 2;
-           return back()->with('success','Successfully Created');
+           return back()->with('success','Successfully Deleted');
         }else {
               return back()->with('failure','Sorry Some Error');
         }

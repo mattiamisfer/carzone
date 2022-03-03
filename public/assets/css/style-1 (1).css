@@ -1,0 +1,63 @@
+.inner-banner  {
+ position:relative;
+}
+.page-heading  {
+ position:absolute;
+ left:50%;
+ top:50%;
+ transform:translate(-50%, -50%);
+ -webkit-transform:translate(-50%, -50%);
+ -moz-transform:translate(-50%, -50%);
+ -o-transform:translate(-50%, -50%);
+ -ms-transform:translate(-50%, -50%);
+ text-transform:uppercase;
+ 
+}
+.page-heading h4  {
+ font-size:25px;
+ color:#fff;
+ font-weight:700;
+}
+.details-box .project-head  {
+ font-size:20px;
+ font-weight:700;
+ text-transform:uppercase;
+ margin-bottom:10px;
+}
+.checkout-steps div {
+ padding:10px;
+}
+.details-box .fa  {
+ margin-right:15px;
+ border:1px solid #999999;
+ width:30px;
+ height:30px;
+ line-height:28px;
+}
+.border-none  {
+ border:none;
+}
+.media  {
+ color:#fff;
+}
+.media-body  {
+ line-height:38px;
+}
+.product-title  {
+ color:#fff;
+}
+.photo-gallery  {
+ border-radius:0px;
+ border-bottom:3px solid #FF9933;
+}
+.relative  {
+position:relative;
+}
+.absalute  {
+position:absolute;
+bottom:10px;
+width:100%;
+}
+.absalute .product-title {
+background:rgba(0,0,0,0.7);
+}

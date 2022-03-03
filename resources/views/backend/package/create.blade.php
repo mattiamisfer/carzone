@@ -46,7 +46,7 @@
                         </ul>
                     </div>
                 @endif --}}
-                    <form class="row g-3" method="POST" action="{{ route('admin.package.store')}}">
+                    <form class="row g-3" method="POST" action="{{ route('admin.package.store')}}" enctype="multipart/form-data">
 
                      @csrf
 
@@ -75,17 +75,22 @@
                      <div class="row">
                         <div class="col-8">
                             <div class="input-group">
-                                <span class="input-group-btn">
+                                {{-- <span class="input-group-btn">
                                   <a id="input_{{$item['name']}}" data-input="thumbnail_{{$item['name']}}" data-preview="holder_{{$item['name']}}" class="btn btn-primary">
                                     <i class="fa fa-picture-o"></i> Choose
                                   </a>
                                 </span>
                                 <input id="thumbnail_{{$item['name']}}" class="form-control" type="text" name="input_{{$item['name']}}">
-                                                    </div>
+                                                    </div> --}}
+
+ 										<input  id="thumbnail_{{$item['name']}}" class="form-control"   name="input_{{$item['name']}}" type="file" class="form-control">
                           </div>
+                     </div>
 
                           <div class="col-4">
-                            <div id="holder_{{$item['name']}}" style="margin-top:15px;max-height:100px;"></div>
+                             
+                                <img id="imgPreview" width="100" height="100" src="#" alt="pic" />
+                            
                           </div>
                      </div>
 
@@ -166,5 +171,24 @@
     CKEDITOR.replace('my-editor', options);
 
 
+    </script>
+
+
+<script>
+    $(document).ready(()=>{
+        $('#imgPreview').attr('src', 'https://endlessicons.com/wp-content/uploads/2012/11/image-holder-icon-614x460.png');
+      $('#thumbnail_image').change(function(){
+        const file = this.files[0];
+        console.log(file);
+        if (file){
+          let reader = new FileReader();
+          reader.onload = function(event){
+            console.log(event.target.result);
+            $('#imgPreview').attr('src', event.target.result);
+          }
+          reader.readAsDataURL(file);
+        }
+      });
+    });
     </script>
 @endsection

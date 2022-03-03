@@ -1,5 +1,6 @@
 @extends('layouts.app')
 
+@section('title','Home')
 @section('content')
 <div id="videoDiv2">
     <video id="video2" preload="" autoplay="" muted="" playsinline="" loop="">
@@ -258,17 +259,22 @@
                         <div class="row">
                          <h5 class="heading"><span>Our Products</span></h5>
                             <div class="col-md-4 col-sm-12" style="margin:0px !important; padding:0px !important; background-color:#333;height: 385px;border-right: 5px solid #FFF;">
-                               <img src="{{ asset('assets/images/iglcoatings.jpg')}}" class="img-responsive" alt=""/> <a href="https://bluefloras.com/word-demo/" target="_blank">
+                              <a href="{{route('collection.igl')}}" target="_blank">
+                              <img src="{{ asset('assets/images/iglcoatings.jpg')}}" class="img-responsive" alt=""/> 
+                              </a>
 
 
                             </div>
 
                             <div class="col-md-4 col-sm-12" style="margin:0px !important; padding:0px !important; background-color:#333;height: 385px;border-right: 5px solid #FFF;border-left: 5px solid #FFF;">
-                                <img src="{{ asset('assets/images/stekuae.jpg')}}" class="img-responsive" alt=""/> <a href="https://bluefloras.com/word-demo/" target="_blank">
+                              <a href="{{route('collection.stek')}}" target="_blank">
+                              <img src="{{ asset('assets/images/stekuae.jpg')}}" class="img-responsive" alt=""/>
+                              </a>  
 
                             </div>
                              <div class="col-md-4 col-sm-12" style="margin:0px !important; padding:0px !important; background-color:#333;height: 385px;border-left: 5px solid #FFF;">
-                                <img src="{{ asset('assets/images/ourservicekit.jpg')}}" class="img-responsive" alt=""/> <a href="https://bluefloras.com/word-demo/" target="_blank">
+                              <a href="{{route('home')}}" target="_blank">
+                              <img src="{{ asset('assets/images/ourservicekit.jpg')}}" class="img-responsive" alt=""/> <a/>
 
                             </div>
 

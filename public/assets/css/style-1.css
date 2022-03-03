@@ -1,0 +1,74 @@
+.inner-banner  {
+ position:relative;
+ border-bottom: 3px solid #8f8f8f;
+}
+.page-heading  {
+ position:absolute;
+ left:50%;
+ top:50%;
+ transform:translate(-50%, -50%);
+ -webkit-transform:translate(-50%, -50%);
+ -moz-transform:translate(-50%, -50%);
+ -o-transform:translate(-50%, -50%);
+ -ms-transform:translate(-50%, -50%);
+ text-transform:uppercase;
+ 
+}
+.page-heading h4  {
+ font-size:25px;
+ color:#fff;
+ font-weight:700;
+}
+.details-box .project-head  {
+ font-size:20px;
+ font-weight:700;
+ text-transform:uppercase;
+ margin-bottom:10px;
+}
+.checkout-steps div {
+ padding:10px;
+}
+.details-box .fa  {
+ margin-right:15px;
+ border:1px solid #999999;
+ width:30px;
+ height:30px;
+ line-height:28px;
+ background-color: #f1f1f1;
+}
+.border-none  {
+ border:none;
+}
+.media  {
+ color:#111;
+}
+.media-body  {
+ line-height:38px;
+}
+.product-title  {
+ color:#fff;
+}
+.photo-gallery  {
+ border-radius:0px;
+ border-bottom:3px solid #FF9933;
+ position:absolute;
+ bottom: 40px;
+}
+.relative  {
+position:relative;
+}
+.absalute  {
+position:absolute;
+bottom:5px;
+width:100%;
+}
+.absalute .product-title {
+background:rgb(12 12 12 / 60%);
+}
+@media only screen and (min-width: 200px)  and (max-width: 767px)  {
+.page-heading h4  {
+ font-size:15px;
+ color:#fff;
+ font-weight:700;
+}
+}

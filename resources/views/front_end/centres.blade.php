@@ -1,12 +1,12 @@
 @extends('layouts.app')
-
+@section('title','Service Centers')
 @section('content')
 <article class="inner-banner">
     <div class="page-heading">
       <h4>SERVICE CENTERS</h4>
     </div>
     <!--page-heading-->
-    <img src="images/insidebanner.jpg" alt="inner banner" class="img-responsive" width="100%"/> </article>
+    <img src="{{ asset('assets/images/insidebanner.jpg') }}" alt="inner banner" class="img-responsive" width="100%"/> </article>
   <!--inner-banner-->
   <div class="bcrumbs">
     <div class="container">

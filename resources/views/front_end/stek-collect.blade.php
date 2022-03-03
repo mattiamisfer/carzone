@@ -1,6 +1,7 @@
 @extends('layouts.app')
+@section('title','Stek Automotive')
 @section('content')
-<div id='collection-component-1640081755453'></div>
+<div id='collection-component-1646113585964'></div>
 <script type="text/javascript">
 /*<![CDATA[*/
 (function () {
@@ -23,13 +24,13 @@
   }
   function ShopifyBuyInit() {
     var client = ShopifyBuy.buildClient({
-      domain: 'czoneae.myshopify.com',
-      storefrontAccessToken: '4e3f6463ef762df892c143cb1baa49d0',
+      domain: 'carzoneae.myshopify.com',
+      storefrontAccessToken: 'f70daff8fe02b9e2d3f0396e4656c8d3',
     });
     ShopifyBuy.UI.onReady(client).then(function (ui) {
       ui.createComponent('collection', {
-        id: '393333375210',
-        node: document.getElementById('collection-component-1640081755453'),
+        id: '268201525380',
+        node: document.getElementById('collection-component-1646113585964'),
         moneyFormat: 'Dhs.%20%7B%7Bamount%7D%7D',
         options: {
   "product": {
@@ -56,12 +57,13 @@
       },
       "button": {
         ":hover": {
-          "background-color": "#cb0915"
+          "background-color": "#ff0031"
         },
-        "background-color": "#e20a17",
+        "background-color": "#d8001d",
         ":focus": {
-          "background-color": "#cb0915"
-        }
+          "background-color": "#ff0031"
+        },
+        "border-radius": "0px"
       }
     },
     "text": {
@@ -94,12 +96,13 @@
       },
       "button": {
         ":hover": {
-          "background-color": "#cb0915"
+          "background-color": "#ff0031"
         },
-        "background-color": "#e20a17",
+        "background-color": "#d8001d",
         ":focus": {
-          "background-color": "#cb0915"
-        }
+          "background-color": "#ff0031"
+        },
+        "border-radius": "0px"
       }
     },
     "text": {
@@ -111,12 +114,13 @@
     "styles": {
       "button": {
         ":hover": {
-          "background-color": "#cb0915"
+          "background-color": "#ff0031"
         },
-        "background-color": "#e20a17",
+        "background-color": "#d8001d",
         ":focus": {
-          "background-color": "#cb0915"
-        }
+          "background-color": "#ff0031"
+        },
+        "border-radius": "0px"
       }
     },
     "text": {
@@ -127,12 +131,12 @@
   "toggle": {
     "styles": {
       "toggle": {
-        "background-color": "#e20a17",
+        "background-color": "#d8001d",
         ":hover": {
-          "background-color": "#cb0915"
+          "background-color": "#ff0031"
         },
         ":focus": {
-          "background-color": "#cb0915"
+          "background-color": "#ff0031"
         }
       }
     }

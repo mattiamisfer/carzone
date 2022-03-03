@@ -5,13 +5,13 @@
     <div class="page-content">
         <!--breadcrumb-->
         <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-            <div class="breadcrumb-title pe-3">Plans</div>
+            <div class="breadcrumb-title pe-3">Packages</div>
             <div class="ps-3">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0 p-0">
                         <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
                         </li>
-                        <li class="breadcrumb-item active" aria-current="page">Edit Plans</li>
+                        <li class="breadcrumb-item active" aria-current="page">Edit Packages</li>
                     </ol>
                 </nav>
             </div>
@@ -46,8 +46,8 @@
                         </ul>
                     </div>
                 @endif --}}
-                    <form class="row g-3" method="POST" action="{{ route('admin.plans.store')}}">
-
+                    <form class="row g-3" method="POST" action="{{ route('admin.plans.update',$plans->id)}}">
+@method('PUT')
                      @csrf
 
 
@@ -58,10 +58,10 @@
                            @if ($item['type'] =='select')
                            <select class="form-select mb-3"   id="input_{{$item['name']}}"
                            name="input_{{$item['name']}}" aria-label="Default select example">
-                            <option value="">Select Category</option>
+                            <option value="">Select Validity</option>
 
                             @foreach ($item['list'] as $category)
-                            <option {{  $category['name'] == $item['value'] ? 'selected' : ''}} value="{{ $category['name'] }}">{{ $category['name'] }}</option>
+                            <option {{  $category['validity'] == $item['value'] ? 'selected' : ''}} value="{{ $category['name'] }}">{{ $category['name'] }}</option>
                             @endforeach
 
 

@@ -178,6 +178,8 @@ return [
         App\Providers\RouteServiceProvider::class,
         UniSharp\LaravelFilemanager\LaravelFilemanagerServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
+        
+    Softon\Indipay\IndipayServiceProvider::class,
 
     ],
 
@@ -233,6 +235,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        
+    'Indipay' => Softon\Indipay\Facades\Indipay::class,
 
     ],
 

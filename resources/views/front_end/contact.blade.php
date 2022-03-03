@@ -38,8 +38,9 @@
         </aside>
         <aside class="col-sm-8 space70">
           <h5 class="heading space40"><span>Contact Form</span></h5>
-          <form method="post" action="#" id="form" role="form" class="form ">
+          <form method="post" action="{{ route('web.contact')}}" id="form" role="form" class="form ">
             <div class="row">
+              @csrf
               <div class="col-md-6 space20">
                 <input name="name" id="name" class="input-md form-control" placeholder="Name *" maxlength="100" required="" type="text">
               </div>

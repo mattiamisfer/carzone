@@ -50,11 +50,19 @@ class LoginController extends Controller
 
     protected function authenticated()
     {
-        $usercheck =  User::with(['subscription'])->find(Auth::user()->id);
+    $usercheck =  User::with(['subscription'])->find(Auth::user()->id);
+
+        // $usercheck = $check = Transcation::where('user_id','=',Auth::user()->id)->where('status','=','Success')
+        // ->get();
         if(Auth::user()->role_as  ==1) //1 = Admin Login
         {
 
-            return redirect()->route('admin.dashboard.index')->with('status','Welcome to your dashboard');
+           // return 'Misfer';
+
+           return redirect()->route('admin.dashboard.index')->with('status','Welcome to your dashboard');
+
+
+          //   return redirect()->route('admin.dashboard.index')->with('status','Welcome to your dashboard');
 
 
           //return  'Welcome misfer';

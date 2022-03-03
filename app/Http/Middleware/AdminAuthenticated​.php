@@ -21,6 +21,7 @@ class AdminAuthenticated​
         {
             // if user is not admin take him to his dashboard
             if ( Auth::user()->role_as ==1) {
+               
                 return $next($request);
             }
 

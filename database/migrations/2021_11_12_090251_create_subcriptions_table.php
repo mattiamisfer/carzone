@@ -18,6 +18,7 @@ class CreateSubcriptionsTable extends Migration
             $table->integer('user_id');
             $table->integer('plan_id');
             $table->dateTime('start_time');
+            $table->integer('num_of_wash');
             $table->dateTime('end_time');
             $table->timestamps();
         });

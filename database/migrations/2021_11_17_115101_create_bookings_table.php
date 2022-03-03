@@ -15,19 +15,21 @@ class CreateBookingsTable extends Migration
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('user_id')->nullable();
 
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            //$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
             $table->date('slot_date');
             $table->string('slot_time');
 
-            $table->unsignedBigInteger('package_id');
+            $table->unsignedBigInteger('package_id')->nullable();
 
-            $table->foreign('package_id')->references('id')->on('packages')->onDelete('cascade');
-            $table->unsignedBigInteger('price_id');
+            // $table->foreign('package_id')->references('id')->on('packages')->onDelete('cascade');
+            $table->unsignedBigInteger('price_id')->nullable();
 
             $table->foreign('price_id')->references('id')->on('prices')->onDelete('cascade');
+
+            $table->bigInteger('location_id')->nullable();
 
 
             $table->timestamps();

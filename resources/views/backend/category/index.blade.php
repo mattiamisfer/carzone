@@ -34,8 +34,26 @@
                         <a class="dropdown-item" href="javascript:;">Something else here</a>
                         <div class="dropdown-divider"></div>	<a class="dropdown-item" href="javascript:;">Separated link</a>
                     </div> --}}
+
+                    
                 </div>
+                
             </div>
+            
+        </div>
+
+        <div class="row">
+            @if (Session::has('success'))
+
+            <div class="alert alert-success" role="alert">
+              {{ Session::get('success') }}
+            </div>
+            @endif
+            @if (Session::has('failure'))
+            <div class="alert alert-danger" role="alert">
+              {{ Session::get('failure') }}
+            </div>
+         @endif
         </div>
         <!--end breadcrumb-->
 
@@ -43,6 +61,7 @@
         <hr/>
 
         <div class="card">
+            
             <div class="card-body">
                 <div class="table-responsive">
                     <table id="example2" class="table table-striped table-bordered">

@@ -6,14 +6,14 @@
 <meta name="keywords" content="" />
 <meta name="description" content="">
 <meta name="author" content="">
-<title>Carzone  || Home</title>
+<title>{{ config('app.name', 'Laravel') }}  || @yield('title') </title>
 <!-- Mobile Metas -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Google Webfont -->
 <link href='http://fonts.googleapis.com/css?family=Raleway:400,200,100,300,500,600,700,800,900' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Lato:400,100,300,300italic,700,900' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-<link rel="icon" href="images/favicon.png" type="image/png" sizes="16x16">
+<link rel="icon" href="{{ asset('assets/images/favicon.png')}}" type="image/png" sizes="16x16">
 
 <!-- CSS -->
 <link rel="stylesheet" href="{{ asset('assets/css/font-awesome/css/font-awesome.css')}}">
@@ -46,22 +46,27 @@
           <div class="col-md-12 col-sm-12">
 
             <div class="tb_center pull-right">
-                <ul class="navbar-nav ml-auto">
+                <ul >
                     <!-- Authentication Links -->
                     @guest
                         @if (Route::has('login'))
-                            <li class="nav-item">
+                            <li >
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>
                         @endif
 
                         @if (Route::has('register'))
-                            <li class="nav-item">
+                            <li  >
                                 <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                             </li>
                         @endif
                     @else
-                        <li class="nav-item ">
+
+                    <li> 
+                      <a href="{{ route('dashboard.index')}}" class="nav-link">
+                      Hi  {{ Auth::user()->name}}</a>
+                    </li>
+                        <li  >
 
                                  <a class="dropdown-item" href="{{ route('logout') }}"
                                    onclick="event.preventDefault();
@@ -78,8 +83,8 @@
             </div>
             <div class="tb_center pull-right">
               <ul>
-                <li><i class="fa fa-phone"></i> <a href="#"> + 971 2 5651506</a></li>
-                <li><i class="fa fa-envelope-o"></i> <a href="#">info@carzone.ae </a></li>
+                <li><i class="fa fa-phone"></i> <a href="tel:+97125651506"> + 971 2 5651506</a></li>
+                <li><i class="fa fa-envelope-o"></i> <a href="mailto:info@carzone.ae">info@carzone.ae </a></li>
               </ul>
             </div>
           </div>
@@ -117,7 +122,7 @@
 </ul>
 </li>
 			 <li  class="dropdown  "  ><a href="#" class="dropdown-toggle" data-toggle="dropdown"
-                                                role="button" aria-expanded="false">Services..</a>
+                                                role="button" aria-expanded="false">Services </a>
                             <ul class="dropdown-menu submenu" role="menu">
 
 
@@ -184,31 +189,35 @@
         <div class="col-md-2 widget-footer col-sm-12">
           <h5>Quick Links</h5>
           <ul class="list-unstyled footer">
-            <li class=""><a href="index.html"><i class="fa fa-angle-double-left"></i> Home</a></li>
-            <li class=""><a href="aboutus.html"><i class="fa fa-angle-double-left"></i> About Us</a></li>
-            <li class=""><a href="service-centers.html"><i class="fa fa-angle-double-left"></i> Service Centers</a></li>
-             <li class=""><a href="events.html"><i class="fa fa-angle-double-left"></i> Events</a></li>
-              <li class=""><a href="packages.html"><i class="fa fa-angle-double-left"></i> Packages</a></li>
-            <li class=""><a href="contact.html"><i class="fa fa-angle-double-left"></i> Contact Us</a></li>
-            <li class=""><a href="privacy.html"><i class="fa fa-angle-double-left"></i> Privacy Policy</a></li>
-            <li class=""><a href="tandc.html"><i class="fa fa-angle-double-left"></i> Terms & Conditions</a></li>
+            <li class=""><a href="/"><i class="fa fa-angle-double-left"></i> Home</a></li>
+            <li class=""><a href="{{ route('about')}}"><i class="fa fa-angle-double-left"></i> About Us</a></li>
+            <li class=""><a href="{{ route('centre')}}"><i class="fa fa-angle-double-left"></i> Service Centers</a></li>
+             <li class=""><a href="{{ route('events')}}"><i class="fa fa-angle-double-left"></i> Events</a></li>
+              <li class=""><a href="{{ route('package')}}"><i class="fa fa-angle-double-left"></i> Packages</a></li>
+            <li class=""><a href="{{ route('contact')}}"><i class="fa fa-angle-double-left"></i> Contact Us</a></li>
+            <li class=""><a href="{{route('web.privacy')}}"><i class="fa fa-angle-double-left"></i> Privacy Policy</a></li>
+            <li class=""><a href="{{ route('web.terms')}}"><i class="fa fa-angle-double-left"></i> Terms & Conditions</a></li>
+            <li class=""><a href="{{route('web.refund')}}"><i class="fa fa-angle-double-left"></i> Refund & Cancellation Policy
+            </a></li>
+
           </ul>
         </div>
         <div class="col-md-3 col-sm-12 widget-footer">
           <h5>Products</h5>
           <ul class="list-unstyled footer" style="margin-bottom:22px;">
-            <li class=""><a href="products.html"><i class="fa fa-angle-double-left"></i> STEK PPF (Paint Protection Film)</a></li>
-            <li class=""><a href="products.html"><i class="fa fa-angle-double-left"></i> STEK Window Tint Film</a></li>
-            <li class=""><a href="products.html"><i class="fa fa-angle-double-left"></i> IGL- Range of Detailing Products</a></li>
+            <li class=""><a href="{{ route('collection.stek')}}"><i class="fa fa-angle-double-left"></i> STEK PPF (Paint Protection Film)</a></li>
+            <li class=""><a href="{{ route('collection.stek')}}"><i class="fa fa-angle-double-left"></i> STEK Window Tint Film</a></li>
+            <li class=""><a href="{{ route('collection.igl')}}"><i class="fa fa-angle-double-left"></i> IGL- Range of Detailing Products</a></li>
 
           </ul>
 
            <h5>Services</h5>
            <ul class="list-unstyled footer" style="margin-bottom:22px;">
-            <li class=""><a href="washclean.html"><i class="fa fa-angle-double-left"></i> Wash Clean & Dry</a></li>
-            <li class=""><a href="detail-polishing.html"><i class="fa fa-angle-double-left"></i> Detailing & Polishing</a></li>
-            <li class=""><a href="protection.html"><i class="fa fa-angle-double-left"></i> Protection</a></li>
+            @foreach ($categories as $category) 
+            <li class=""><a href="{{ route('services',$category->id)}}"><i class="fa fa-angle-double-left"></i> {{ ucwords(strtolower($category->name))}}</a></li>
 
+            @endforeach
+           
           </ul>
         </div>
 
@@ -256,15 +265,15 @@
     <div class="container">
       <div class="row">
         <div class="col-md-7 col-sm-7">
-          <ul class="flinks">
+          {{-- <ul class="flinks">
             <li><a href="index.html">Site Map</a></li>
             <li><a href="index.html">Search Terms</a></li>
             <li><a href="index.html">Customer Service</a></li>
-          </ul>
+          </ul> --}}
           <br>
         </div>
         <div class="col-md-5 col-sm-5">
-          <p class="pull-right">&copy; 2021 Carzone. All Right Reserved. Powered By <a href="http://affinityopus.com/">Affinity Interactive </a></p>
+          <p class="pull-right">&copy; {{date('Y')}} Carzone. All Right Reserved. Powered By <a href="http://affinityopus.com/">Affinity Interactive </a></p>
         </div>
       </div>
     </div>
@@ -273,6 +282,8 @@
   <div id="backtotop"><i class="fa fa-chevron-up"></i></div>
   <!-- Javascript -->
   <script src="{{ asset('assets/js/jquery.js')}}"></script>
+
+  @yield('js')
   <script type="text/javascript">
                                               // Call this function once the rest of the document is loaded
                                               function loadAddThis() {
@@ -292,5 +303,8 @@
   <script src="{{ asset('assets/js/jquery-ui.min.js')}}"></script>
   <script src="{{ asset('assets/js/vendors/select/jquery.selectBoxIt.min.js')}}"></script>
   <script src="{{ asset('assets/js/main.js')}}"></script>
+
+
+  @yield('payment-js');
   </body>
   </html>
