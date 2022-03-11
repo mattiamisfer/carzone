@@ -10,7 +10,7 @@ class Package extends Model
     use HasFactory;
 
 
-    protected $fillable = ['name','image','content','category_id'];
+    protected $fillable = ['name','image','content','category_id','subcategory_id'];
 
 
 

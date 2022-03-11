@@ -1,10 +1,10 @@
 @extends('layouts.app')
-@section('title','IGL CLOATING')
+@section('title','PERSONAL CAR CARE')
 @section('content')
 
 
 
-<div id='collection-component-1646653667429'></div>
+<div id='collection-component-1646663508929'></div>
 <script type="text/javascript">
 /*<![CDATA[*/
 (function () {
@@ -32,8 +32,8 @@
     });
     ShopifyBuy.UI.onReady(client).then(function (ui) {
       ui.createComponent('collection', {
-        id: '268088868996',
-        node: document.getElementById('collection-component-1646653667429'),
+        id: '268499484804',
+        node: document.getElementById('collection-component-1646663508929'),
         moneyFormat: 'Dhs.%20%7B%7Bamount%7D%7D',
         options: {
   "product": {
@@ -69,12 +69,9 @@
         "border-radius": "0px"
       }
     },
-    "buttonDestination": "modal",
-    "contents": {
-      "options": false
-    },
+    "buttonDestination": "checkout",
     "text": {
-      "button": "View product"
+      "button": "Buy now"
     }
   },
   "productSet": {

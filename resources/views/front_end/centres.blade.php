@@ -21,7 +21,7 @@
     <div class="container">
       <div class="row">
         <div class="col-md-6 col-sm-12 checkout-steps">
-          <div style=""> <img src="images/green_clean.jpeg" alt="" style="" class="img-responsive"/>
+          <div style=""> <img src="{{ asset('assets/images/green_clean.jpeg')}}" alt="" style="" class="img-responsive"/>
             <div id="accordion">
               <div class="accordion-content border-none default">
                 <div class="details-box">
@@ -36,7 +36,7 @@
           </div>
         </div>
         <div class="col-md-6 col-sm-12 checkout-steps">
-          <div style=""> <img src="images/carzone.png" alt="" style="" class="img-responsive"/>
+          <div style=""> <img src="{{ asset('assets/images/carzone.png') }}" alt="" style="" class="img-responsive"/>
             <div id="accordion">
               <div class="accordion-content border-none default">
                 <div class="details-box">
@@ -56,7 +56,7 @@
 
        <video preload="" autoplay="" muted="" playsinline="" loop="" controls="" style="max-width: 100%; height: auto; margin-top: 10px;margin-bottom: 50px; text-align:center;" width="100%">
 
-                                        <source src="location.mp4" type="video/mp4">
+                                        <source src="{{ asset('assets/location.mp4')}}" type="video/mp4">
 
 
                                           </video>

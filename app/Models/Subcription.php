@@ -21,6 +21,11 @@ class Subcription extends Model
         return $this->belongsTo(Plans::class,'plan_id','id');
     }
 
+    public function booking_list() {
+        return $this->hasMany(Booking::class,'subscription_id','id');
+
+    }
+
     public function booking() {
         return $this->hasMany(Booking::class,'subscription_id','id')->where('slot_date', '<',Carbon::now())->where('user_id','=',Auth::user()->id);
 

@@ -5,13 +5,13 @@
     <div class="page-content">
         <!--breadcrumb-->
         <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-            <div class="breadcrumb-title pe-3">Package</div>
+            <div class="breadcrumb-title pe-3">Services</div>
             <div class="ps-3">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0 p-0">
                         <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
                         </li>
-                        <li class="breadcrumb-item active" aria-current="page">Add Package</li>
+                        <li class="breadcrumb-item active" aria-current="page">Edit Service</li>
                     </ol>
                 </nav>
             </div>
@@ -56,6 +56,8 @@
                             <label for="{!!  Str::of(str_replace(' ', '_', $item['label']))->lower();  !!}" class="form-label"> {{ $item['label']}}</label>
 
                            @if ($item['type'] =='select')
+
+                           @if ( $item['data'] == true)
                            <select class="form-select mb-3"   id="input_{{$item['name']}}"
                            name="input_{{$item['name']}}" aria-label="Default select example">
                             <option value="">Select Category</option>
@@ -66,6 +68,14 @@
 
 
                         </select>
+                        @else
+                        <select class="form-select mb-3"   id="input_{{$item['name']}}"
+                        name="input_{{$item['name']}}" aria-label="Default select example">
+                        <option value="">Sub Category Select</option>
+                        
+
+                    </select>
+                    @endif
 
                         @elseif ($item['type'] =='textarea')
                         <textarea  id="my-editor" name="input_{{ $item['name']}}" class="form-control">
@@ -92,7 +102,7 @@
                      </div>
 
                           <div class="col-4">
-                            <img id="imgPreview" width="100" height="100" src="{{Storage::disk('s3')->url('images/'.$item['value'])}}" alt="pic" />
+                            <img id="imgPreview" width="300"   src="{{Storage::disk('s3')->url('images/'.$item['value'])}}" alt="pic" />
 
                            </div>
                      </div>
@@ -134,7 +144,7 @@
 
 
 
-
+                             <input type="hidden" id="subcat" value="{{$package->subcategory_id }}">
 
 
 
@@ -173,6 +183,80 @@
 
     CKEDITOR.replace('my-editor', options);
 
+
+
+
+
+
+
+
+
+
+
+
+    
+
+    $(function() {
+        $("#input_category_name").change(function(e){
+        $.ajaxSetup({
+      headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    e.preventDefault();
+        var id = $(this).find("option:selected").val();
+
+        var token = $("meta[name='csrf-token']").attr("content");
+
+
+
+        var option =  $('#input_sub_category_name');
+       option.empty();
+
+        $.ajax({
+           type:'POST',
+           url:"{{ route('admin.ajaxRequest.post')}}",
+          // _token: 'MSJuiQE8xTHugPOLZw0N4qiHZkk8w2B0kc4QjP58' ,
+           data:{id:id, '_token':token},
+           success:function(data){
+             // alert(data.success);
+              console.log(data);
+              var data = data.success;
+              for (var i = 0; i < data.length; i++) {
+
+                  console.log(data[i].id);
+                 option.append('<option id=' + data[i].id + ' value=' + data[i].id + '>' + data[i].name + '</option>');
+            }
+           }
+        });
+ 
+
+});
+$.ajaxSetup({
+    headers: {
+    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+  
+
+
+var sub_cat = $('#subcat').val();
+if($('#subcat').val().length) {
+var option =  $('#input_sub_category_name');
+
+//alert('working');
+
+$.get("/admin/ajaxRequestcars/"+sub_cat,
+ function(data, status){
+     var data = data.success;
+//console.log(data);
+    // alert(data.id);
+      option.append('<option selected id=' + data.id + ' value=' + data.id + '>' + data.name + '</option>');
+
+});
+}
+    });
 
     </script>
 @endsection

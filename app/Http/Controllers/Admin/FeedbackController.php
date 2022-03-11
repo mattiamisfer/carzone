@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\user;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
+use App\Models\Feedback;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class HistoryController extends Controller
+class FeedbackController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,12 +17,9 @@ class HistoryController extends Controller
     {
         //
 
-          $users =  User::with(['subscription.plans','subscription.booking_list' => function($q) {
-                 $q->orderBy('slot_date','ASC');
-                 //$q->where('id','=',1);
-           }
-           ])->find(Auth::user()->id);
-         return view('user.history.index',compact('users'));
+         $feedbacks = Feedback::with('user')->orderBy('id','DESC')->get();
+
+         return view('backend.booking.feedback',compact('feedbacks'));
     }
 
     /**

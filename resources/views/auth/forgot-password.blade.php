@@ -1,12 +1,13 @@
 @extends('layouts.app')
+@section('title','Forgot Password');
 @section('content')
 
-@section('title','Login');
+
 
 
 <article class="inner-banner">
     <div class="page-heading">
-      <h4>LOGIN</h4>
+      <h4>Forgot Password</h4>
     </div>
     <!--page-heading-->
     <img src="{{ asset('assets/images/insidebanner.jpg')}}" alt="inner banner" class="img-responsive" width="100%"/> </article>
@@ -15,7 +16,7 @@
     <div class="container">
       <ul>
         <li><a href="#">Home</a></li>
-        <li>Login</li>
+        <li>Forgot Password</li>
       </ul>
     </div>
   </div>
@@ -28,12 +29,17 @@
         <div class="logindiv col-sm-6 col-md-offset-3 space70"
         <aside class="">
        <div class="col-md-12 space20" style="text-align:center;">
-                 <h3 style="color:rgb(0, 0, 0);">Login</h3>
+                 <h3 style="color:rgb(0, 0, 0);">Forgot Paassword</h3>
               </div>
         </aside>
          <aside class=""  style="margin-top: -50px;">
        <div class="col-md-12 space20" style="text-align:center;">
-        <form  method="POST" action="{{ route('login') }}" id="form" role="form" class="form ">
+        @if (session('status'))
+        <div class="alert alert-success" role="alert">
+            {{ session('status') }}
+        </div>
+    @endif
+        <form  method="POST" action="{{ route('password.email') }}" id="form" role="form" class="form ">
             <div class="row">
                 @csrf
 
@@ -50,27 +56,15 @@
                   </span>
               @enderror
               </div>
-              <div class="col-md-12 space20">
-                <input
-                class="form-control @error('password') is-invalid @enderror"
-                 name="password" required autocomplete="current-password"
-                id="password" class="input-md form-control"
-                placeholder="Password *" maxlength="100" required=""
-                type="password">
-                @error('password')
-                <span class="invalid-feedback" role="alert">
-                    <strong style="color: red">{{ $message }}</strong>
-                </span>
-            @enderror
-              </div>
+              
+
+
+
             </div>
 
-            <button type="submit" class="btn-black"> Login </button>
+            <button type="submit" class="btn-black"> Sent Password Reset Link </button>
 
-            <a href="{{ route('register')}}">Register</a>
-            <div class="col-md-12 space20">
-              <a href="{{ route('password.requests')}}">Forgot Password?</a>
-            </div>
+            {{-- <a href="{{ route('register')}}">Register</a> --}}
           </form>
           </div>
         </aside>

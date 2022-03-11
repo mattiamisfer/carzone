@@ -23,7 +23,7 @@
 <link rel="stylesheet" href="{{ asset('assets/js/vendors/rs-plugin/css/settings.css')}}">
 <link rel="stylesheet" href="{{ asset('assets/js/vendors/select/jquery.selectBoxIt.css')}}">
 <link rel="stylesheet" href="{{ asset('assets/css/subscribe-better.css')}}">
-<link rel="stylesheet" href="../../../../ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/ui-lightness/jquery-ui.css">
+{{-- <link rel="stylesheet" href="../../../../ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/ui-lightness/jquery-ui.css"> --}}
 <link rel="stylesheet" href="{{ asset('assets/plugin/owl-carousel/owl.carousel.css')}}">
 <link rel="stylesheet" href="{{ asset('assets/plugin/owl-carousel/owl.theme.css')}}">
 <link rel="stylesheet" href="{{ asset('assets/css/style.css')}}">
@@ -117,6 +117,7 @@
 <li class=""><a href="{{ route('collection.igl') }}">IGL COATING </a></li>
 
 <li class=""><a href="{{ route('collection.stek') }}">STEK  AUTOMATIVE </a></li>
+<li class=""> <a href="{{ route('collection.personal')}}">PERSONAL CAR CARE</a></li>
 
 
 </ul>
@@ -246,12 +247,10 @@
           </ul>
            <div class="clearfix"></div>
           <ul class="f-social">
-            <li><a href="https://www.facebook.com/" class="fa fa-facebook"></a></li>
-            <li><a href="https://www.twitter.com/" class="fa fa-twitter"></a></li>
-            <li><a href="https://feedburner.google.com/" class="fa fa-rss"></a></li>
-            <li><a href="mailto:email@website.com" class="fa fa-envelope"></a></li>
+            <li><a href="https://www.facebook.com/carzoneuae.official/" target="_blank" class="fa fa-facebook"></a></li>
+          
 
-            <li><a href="https://www.instagram.com/" class="fa fa-instagram"></a></li>
+            <li><a href="https://www.instagram.com/carzoneae/" target="_blank" class="fa fa-instagram"></a></li>
           </ul>
 
         </div>

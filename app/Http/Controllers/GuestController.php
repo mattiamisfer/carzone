@@ -69,8 +69,8 @@ class GuestController extends Controller
       //  include('Crypto.php');
 
         $merchant_data='';
-        $working_key='6DC3440A071E133F2F3BB960AB2FFC89';//Shared by CCAVENUES
-        $access_code='AVED04JB23BL21DELB';//Shared by CCAVENUES
+        $working_key='E59672C38DD5EE28DF5391E6A7618C09';//Shared by CCAVENUES
+        $access_code='AVWH04JB23BJ07HWJB';//Shared by CCAVENUES
         
         foreach ($_POST as $key => $value){
             $merchant_data.=$key.'='.$value.'&';
@@ -113,7 +113,7 @@ class GuestController extends Controller
         );
 
         // $request->all();
-          $ifbooking = Booking::whereDate('slot_date','=', Carbon::parse($request->start_date)->format('Y-m-d'))->
+           $ifbooking = Booking::whereDate('slot_date','=', Carbon::parse($request->start_date)->format('Y-m-d'))->
         where('slot_time','=',$request->start_time)->where('location_id','=',$request->washloc)->count();
         
   // $query =  DB::getQueryLog();
@@ -161,7 +161,7 @@ class GuestController extends Controller
 
 
     public function status() {
-        $workingKey='6DC3440A071E133F2F3BB960AB2FFC89';		//Working Key should be provided here.
+        $workingKey='E59672C38DD5EE28DF5391E6A7618C09';		//Working Key should be provided here.
         $encResponse=  $_POST['encResp'];		//This is the response sent by the CCAvenue Server
         $rcvdString=$this->decrypt($encResponse,$workingKey);		//Crypto Decryption used as per the specified working key.
         $order_status="";
@@ -238,7 +238,7 @@ class GuestController extends Controller
               $booking->price_id  =   $mer[1];
               $booking->subscription_id = 0;
               $booking->location_id =  $location[1];
-
+              $booking->status = 'pending';
               $booking->save();
       
      //    return $guest->id;

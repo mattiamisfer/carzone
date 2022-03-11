@@ -5,7 +5,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <title>Carwash Userportal</title>
+    <title>Carwash User Portal</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" href="{{ asset('assets/images/favicon.png')}}" type="image/png" sizes="16x16">
     <!-- <link rel="icon" href="img/favicon.png" type="image/png"> -->
@@ -78,6 +78,13 @@
             <span>Transaction History</span>
           </a>
            </li>
+
+           <li class="mm-active">
+            <a class=""  href="{{ route('user.booking.list.index')}}"  aria-expanded="false">
+         <img src="img/menu-icon/2.svg" alt="">
+              <span>Booking History</span>
+            </a>
+             </li>
 	<!--<li class="mm-active">-->
  <!--         <a class=""  href="reviews.html"  aria-expanded="false">-->
  <!--  <img src="img/menu-icon/6.svg" alt="">-->

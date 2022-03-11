@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Booking;
 use App\Models\Category;
 use App\Models\Package;
+use App\Models\Plans;
 use App\Models\Subcription;
 use App\Models\Transcation;
 use App\Models\User;
@@ -27,9 +28,11 @@ class DashboardController extends Controller
 
 
 
-       $users = User::all()->count();
-       $packages = Package::all()->count();
+       $users = User::where('role_as','=',2)->count();
+       $packages = Plans::all()->count();
 
+        $month = Carbon::now()->month;
+      $usersMonth = User::whereMonth('created_at','=',$month)->where('role_as','=',2)->get()->count();
         $subscriptions = Subcription::all()->count();
 
   $total =       DB::table("transcations")->get()->sum("amount");
@@ -44,7 +47,7 @@ class DashboardController extends Controller
 
          
 
-        return view('backend.dashboard.index',compact('users','packages','subscriptions','total','bookings'));
+        return view('backend.dashboard.index',compact('users','packages','subscriptions','total','bookings','usersMonth'));
     }
 
     /**

@@ -15,4 +15,8 @@ class ProductController extends Controller
     public function stekCollection() {
         return view('front_end.stek-collect');
     }
+
+    public function personal() {
+        return view('front_end.personal-care');
+    }
 }

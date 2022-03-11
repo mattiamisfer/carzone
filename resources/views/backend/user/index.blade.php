@@ -25,8 +25,9 @@
                         </li> --}}
                     </div>
                     <div class="profile_info">
-                        <img src="img/client_img.png" alt="#">
-                        <div class="profile_info_iner">
+                        <img src="{{ asset('assets/profile.png')}}" alt="#">
+
+                         <div class="profile_info_iner">
                             <p>Welcome User!</p>
                             <h5>@auth
                                 {{Auth::user()->name}}
@@ -59,7 +60,7 @@
         <div class="row justify-content-center">
             <div class="col-lg-12">
                 <div class="card">
-                    <div class="card-header">Mail</div>
+                    {{-- <div class="card-header">Mail</div> --}}
                     <div class="card-body">
                         @if (Session::has('success'))
 
@@ -73,20 +74,35 @@
                         </div>
                      @endif
     
-                        @error('title')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
-                        
-                        <form method="post" action="{{ route('user.feedback.store') }}">
-                            <div class="form-group">
-                                @csrf
-                                <label class="label">Mail Body: </label>
-                                {{-- <input type="text" name="title" class="form-control" /> --}}
 
-                                <textarea class="form-control" style="height:300px" name="title" placeholder="Content"></textarea>
+                        <form method="post" action="{{ route('user.feedback.store') }}">
+                            <div class="input_wrap common_date_picker mb_20">
+                                <label for="#">Reason</label>
+                            <select class="form-control" name="reason">
+                                <option value="">Choose your Reason</option>
+                                <option value="Feedback on wash">Feedback on wash</option>
+                                <option value="After Service query">After Service query</option>
+                                <option value="Package related">Package related</option>
+                                </select>
+                                @error('reason')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                            
                             </div>
                             <div class="form-group">
-                                <input type="submit" class="btn btn-success" value="Send"/>
+                                @csrf
+                                <label class="label">Feedback </label>
+                                {{-- <input type="text" name="title" class="form-control" /> --}}
+
+                                <textarea class="form-control" style="height:300px" name="feedback" placeholder="Feedback"></textarea>
+                                @error('feedback')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                            
+                           
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" class="btn btn-success" value="Submit"/>
                             </div>
                         </form>
                     </div>

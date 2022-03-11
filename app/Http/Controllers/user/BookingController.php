@@ -85,6 +85,8 @@ class BookingController extends Controller
               $booking->price_id  = $request->type;
               $booking->subscription_id = $subscription->id;
               $booking->location_id = $request->location_id;
+              $booking->status = 'pending';
+
              if($booking->save()) {
                  
                 return response()->json(['status'=>2,'message'=> 'Successfully Booked your Slot'],200);
@@ -126,6 +128,12 @@ class BookingController extends Controller
     public function edit($id)
     {
         //
+           $booking = Booking::find($id);
+        $packages = Package::with(['price'])->where('name','!=','video')->get();
+        $locations = Location::all();
+        //$dashboards  =  User::with(['subscription'])->find(Auth::user()->id);
+
+        return view('user.edit',compact('packages','locations','booking'));
     }
 
     /**
@@ -138,7 +146,36 @@ class BookingController extends Controller
     public function update(Request $request, $id)
     {
         //
+
+     
+   
+
+        $ifbooking = Booking::whereDate('slot_date','=', Carbon::parse($request->start_date)->format('Y-m-d'))->
+        where('slot_time','=',$request->start_time)->where('package_id','=',$request->package)->count();
+   
+  // $query =  DB::getQueryLog();
+
+  if($ifbooking == config('app.value')) {
+      return response()->json(['status'=>1,'message'=> 'Sorry Slot Already Taken'],200);
+  } else {
+       $subscription = Subcription::where('user_id','=',Auth::user()->id)->whereDate('end_time', '>', Carbon::now())
+   ->first();
+   $booking =  Booking::find($id);
+             $booking->user_id = Auth::user()->id;
+             $booking->slot_date = Carbon::parse($request->start_date)->format('Y-m-d');
+             $booking->slot_time =  $request->start_time;
+             $booking->package_id = $request->package;
+             $booking->price_id  = $request->type;
+             $booking->subscription_id = $subscription->id;
+             $booking->location_id = $request->location_id;
+            if($booking->save()) {
+                
+               return response()->json(['status'=>2,'message'=> 'Successfully Booked your Slot'],200);
+            }else {
+                  return response()->json(['status'=>3,'message'=> 'Sorry Some Error'],200);
+            }
     }
+}
 
     /**
      * Remove the specified resource from storage.
@@ -149,5 +186,23 @@ class BookingController extends Controller
     public function destroy($id)
     {
         //
+
+     //   return response()->json(['success'  => 1],200);
+
+     try {
+        $delete = Booking::find($id);
+        $delete->delete();
+        return response()->json(['success'=> 'Successfully Deleted'],200);
+
+     } catch(\Exception $exception) {
+        $errormsg = 'No Customer to de!' . $exception->getCode();
+
+        return response()->json(['fail'=> $errormsg]);
+
+     }
+ 
+
+    
+ 
     }
 }

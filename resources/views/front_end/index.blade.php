@@ -12,7 +12,7 @@
             <h2>We're available for</h2>
             <h3>HTML projects</h3>
             <p class="videoClick">
-                <a href="portfolio.php">Check our rates</a>
+                {{-- <a href="portfolio.php">Check our rates</a> --}}
             </p>
         </div>
     </div>
@@ -66,7 +66,7 @@
           <div id="isotope" class="isotope">
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" >
               <div class="product-item" >
-                <div class="item-thumb relative"> <img src="{{ asset('assets/images/washthumb.jpg')}}" class="img-responsive" alt=""/> <a href="https://bluefloras.com/word-demo/" target="_blank">
+                <div class="item-thumb relative"> <img src="{{ asset('assets/images/washthumb.jpg')}}" class="img-responsive" alt=""/> <a href="{{ route('about')}}" >
                   <div class="overlay-rmore fa fa-link quickview" data-toggle="modal"></div>
                   </a>
 
@@ -80,9 +80,8 @@
     <p>Our flagship product, DYNOshield is a premium paint protection film offering top-notch performance, durability, and reliability. </p>
 
     <p>DYNOshield’s nano-glass top coat is bonded to the film at a molecular level during the manufacturing process, virtually eliminating the need for waxes or after-market top coatings. Hydrophobic and highly damage-resistant, DYNOshield also boasts super self-healing properties and puncture resistance, effectively shielding against surface-level nicks and scratches. </p>
-     <div class="viewall">
-                        <!---<a href="<img src="images/products/dynomageblue.jpg" class="img-responsive" alt=""/> <a href="https://bluefloras.com/word-demo/index.php?route=product/category&path=305" target="_blank">Browse all Products</a>--->
-                        </div>
+     {{-- <div class="viewall">
+                         </div> --}}
             </div>
             <div class="pagebrk"></div>
              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" >
@@ -207,8 +206,7 @@
 
         </div>
         <!---<div class="viewall">
-                        <a href="<img src="images/products/dynomageblue.jpg" class="img-responsive" alt=""/> <a href="https://bluefloras.com/word-demo/index.php?route=product/category&path=302" target="_blank">Browse all Products</a>
-                        </div>--->
+                         </div>--->
             </div>
       </div>
     </div>
@@ -259,7 +257,7 @@
                         <div class="row">
                          <h5 class="heading"><span>Our Products</span></h5>
                             <div class="col-md-4 col-sm-12" style="margin:0px !important; padding:0px !important; background-color:#333;height: 385px;border-right: 5px solid #FFF;">
-                              <a href="{{route('collection.igl')}}" target="_blank">
+                              <a href="{{route('collection.igl')}}" >
                               <img src="{{ asset('assets/images/iglcoatings.jpg')}}" class="img-responsive" alt=""/> 
                               </a>
 
@@ -267,13 +265,13 @@
                             </div>
 
                             <div class="col-md-4 col-sm-12" style="margin:0px !important; padding:0px !important; background-color:#333;height: 385px;border-right: 5px solid #FFF;border-left: 5px solid #FFF;">
-                              <a href="{{route('collection.stek')}}" target="_blank">
+                              <a href="{{route('collection.stek')}}" >
                               <img src="{{ asset('assets/images/stekuae.jpg')}}" class="img-responsive" alt=""/>
                               </a>  
 
                             </div>
                              <div class="col-md-4 col-sm-12" style="margin:0px !important; padding:0px !important; background-color:#333;height: 385px;border-left: 5px solid #FFF;">
-                              <a href="{{route('home')}}" target="_blank">
+                              <a href="{{route('collection.personal')}}" >
                               <img src="{{ asset('assets/images/ourservicekit.jpg')}}" class="img-responsive" alt=""/> <a/>
 
                             </div>
@@ -281,7 +279,7 @@
 
                         </div>
                         <div class="viewall">
-                        <a href="<img src="images/products/dynomageblue.jpg" class="img-responsive" alt=""/> <a href="https://bluefloras.com/word-demo/" target="_blank">Browse all Products</a>
+                 <a href="{{ route('collection.igl')}}" >Browse all Products</a>
                         </div>
                  <!---   </div>  --------->
                 </div>
@@ -292,51 +290,39 @@
                 <div class="space30 clearfix"></div>
 
                 <!-- TESTIMONIAL -->
+
+ 
+                @if ($testimonials->count() >= 1)
+                  
+             
                 <div class="testimonial parallax-bg2">
                     <div class="container">
                     <h5 class="heading space40"><span>What Clients Says</span></h5>
                         <div class="row">
                             <div class="col-md-12 col-sm-12">
                                 <div class="quote-carousel">
+
+                                  @foreach ($testimonials as $test)
+                                    
+                                  
                                     <div>
 
                                         <div class="quote-info">
 
-                                            <p class="bubble">"They provide excellent care for my cars. Thoroughly professional with immense expertise."</p><br>
-                                            <h4>Elena Gomes</h4>
+                                            <p class="bubble">
+                                              "{{$test->feedback}}" </p><br>
+                                            <h4>{{$test->user->name}}</h4>
                                             <cite>July 28 - 2018</cite>
                                         </div>
                                     </div>
-                                    <div>
-
-                                        <div class="quote-info">
-
-                                            <p class="bubble">"Awesome service. Very amiable. Can vouch to anybody with 100% assurance"</p><br>
-                                            <h4>Ali Azhar</h4>
-                                            <cite>July 28 - 2018</cite>
-                                        </div>
-                                    </div>
-                                    <div>
-
-                                        <div class="quote-info">
-
-                                            <p class="bubble">"Very much impressed with their service. Prompt, precise and professional. "</p><br>
-                                            <h4>Rizvi Shah</h4>
-                                            <cite>July 28 - 2018</cite>
-                                        </div>
-                                    </div>
-                                    <div>
-
-                                        <div class="quote-info">
-
-                                            <p class="bubble">"I got an excellent service for my car, from cooperation i was very pleased, everything was done at the highest level.Boldly I recommend to all this company."</p><br>
-                                            <h4>Rahman Basith</h4>
-                                            <cite>July 28 - 2018</cite>
-                                        </div>
-                                    </div>
+                                    @endforeach
+                                   
+                                  
+                                  
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                @endif
 @endsection

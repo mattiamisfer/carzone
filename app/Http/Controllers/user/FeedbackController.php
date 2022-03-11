@@ -4,6 +4,7 @@ namespace App\Http\Controllers\user;
 
 use App\Http\Controllers\Controller;
 use App\Mail\FeedbackMail;
+use App\Models\Feedback;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -23,34 +24,38 @@ class FeedbackController extends Controller
     public function store(Request $request) {
 
         $this->validate($request, [
-            'title' => 'required',
+            'feedback' => 'required',
+            'reason' => 'required'
         
             // 'password' => ['required', 'string', 'min:8', 'confirmed'],
         ],
         [
-            'title.required'=> 'Body is Required', // custom message
+            'feedback.required'=> 'Feedback is Required', // custom message
+            'reason.required' => 'Reason is Required'
 
 
            ]
        
         );
 
-        $order = [
-            'name' => Auth::user()->name,
-            'content' => $request->title,
-        ];
 
-        $email = Auth::user()->email;
-      Mail::to($email)->send(new FeedbackMail($order));
+
+        $feedback = new Feedback();
+        $feedback->reason = $request->reason;
+        $feedback->feedback = $request->feedback;
+        $feedback->user_id = Auth::user()->id;
+        
+ 
 
  
 
-      if( count(Mail::failures()) > 0 ) {
-        return back()->with('failure','Sorry Some Error');
+      if( $feedback->save() ) {
         // return 2;
-      
+        return back()->with('success','Successfully Created');   
+
     }else {
-        return back()->with('success','Mail Successfully Sent');   
+        return back()->with('failure','Sorry Some Error');
+
     }
     }
 }

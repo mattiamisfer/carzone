@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Booking;
+use App\Models\Feedback;
 use Illuminate\Http\Request;
 
 class BookingController extends Controller
@@ -17,4 +18,32 @@ class BookingController extends Controller
 
           return view('backend.booking.index',compact('bookings'));
     }
+
+
+    public function update(Request $request,$id) {
+      try {
+        $booking = Booking::find($id);
+        $booking->status = $request->status;
+        if($booking->save()) {
+          return response()->json(['success','Updated Successfully'],200);
+        }
+      } catch (\Exception $exeption) {
+
+      }
+    }
+
+    public function update_status(Request $request,$id) {
+      try {
+        $booking = Feedback::find($id);
+        $booking->status = $request->status;
+        if($booking->save()) {
+          return response()->json(['success','Updated Successfully'],200);
+        }
+      } catch (\Exception $exeption) {
+
+      }
+    }
+
+
+
 }

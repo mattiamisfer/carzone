@@ -44,8 +44,8 @@
                         <div class="card-body">
                             <div class="d-flex align-items-center">
                                 <div>
-                                    <p class="mb-0">Total Packages</p>
-                                    <h4 class="mb-0 text-success"> {{$packages}}</h4>
+                                    <p class="mb-0">Monthly Customers</p>
+                                    <h4 class="mb-0 text-success"> {{$usersMonth}}</h4>
                                 </div>
                                 <div class="ms-auto"><i class="bx bx-line-chart-down font-35 text-success"></i>
                                 </div>

@@ -65,7 +65,8 @@
                   <div class="white_box mb_30">
                       <div class="input_wrap common_date_picker mb_20">
                           <label for="#">Start date</label>
-                          <input name="start_date"    autocomplete="off" required class="input_form" id="start_datepicker" placeholder="Pick a start date">
+                          <input name="start_date" value="  {{ \Carbon\Carbon::parse($booking->slot_date)->format('d-m-Y') }}
+                          "  autocomplete="off" required class="input_form" id="start_datepicker" placeholder="Pick a start date">
                       </div>
                   </div>
               </div>
@@ -77,18 +78,18 @@
                         <label for="#">Start date</label>
                 <select name="start_time" id="start_time" required class="form-control with-icon" data-validetta="required">
                     <option selected="" value="">Drop In Time</option>
-                    <option value="9:00AM - 10:00AM">9:00AM - 10:00AM</option>
-                    <option value="10:00AM - 11:00AM">10:00AM - 11:00AM</option>
-                    <option value="11:00AM - 12:00AM">11:00AM - 12:00AM</option>
-                    <option value="12:00NOON - 01:00PM">12:00NOON - 01:00PM</option>
-                    <option value="01:00PM - 02:00PM">01:00PM - 02:00PM</option>
-                    <option value="02:00PM - 03:00PM">02:00PM - 03:00PM</option>
-                    <option value="03:00PM - 04:00PM">03:00PM - 04:00PM</option>
-                    <option value="04:00PM - 05:00PM">04:00PM - 05:00PM</option>
-                    <option value="05:00PM - 06:00PM">05:00PM - 06:00PM</option>
-                    <option value="06:00PM - 07:00PM">06:00PM - 07:00PM</option>
-                    <option value="07:00PM - 08:00PM">07:00PM - 08:00PM</option>
-                    <option value="07:00PM - 08:00PM">07:00PM - 08:00PM</option>
+                    <option {{ $booking->slot_time == '9:00AM - 10:00AM' ? 'selected' : ''}} value="9:00AM - 10:00AM">9:00AM - 10:00AM</option>
+                    <option {{ $booking->slot_time == '10:00AM - 11:00AM' ? 'selected' : ''}}  value="10:00AM - 11:00AM">10:00AM - 11:00AM</option>
+                    <option {{ $booking->slot_time == '11:00AM - 12:00AM' ? 'selected' : ''}} value="11:00AM - 12:00AM">11:00AM - 12:00AM</option>
+                    <option {{ $booking->slot_time == '12:00NOON - 01:00PM' ? 'selected' : ''}} value="12:00NOON - 01:00PM">12:00NOON - 01:00PM</option>
+                    <option {{ $booking->slot_time == '01:00PM - 02:00PM' ? 'selected' : ''}}  value="01:00PM - 02:00PM">01:00PM - 02:00PM</option>
+                    <option {{ $booking->slot_time == '02:00PM - 03:00PM' ? 'selected' : ''}}  value="02:00PM - 03:00PM">02:00PM - 03:00PM</option>
+                    <option {{ $booking->slot_time == '03:00PM - 04:00PM' ? 'selected' : ''}}  value="03:00PM - 04:00PM">03:00PM - 04:00PM</option>
+                    <option {{ $booking->slot_time == '04:00PM - 05:00PM' ? 'selected' : ''}}  value="04:00PM - 05:00PM">04:00PM - 05:00PM</option>
+                    <option {{ $booking->slot_time == '05:00PM - 06:00PM' ? 'selected' : ''}}  value="05:00PM - 06:00PM">05:00PM - 06:00PM</option>
+                    <option {{ $booking->slot_time == '06:00PM - 07:00PM' ? 'selected' : ''}}  value="06:00PM - 07:00PM">06:00PM - 07:00PM</option>
+                    <option  {{ $booking->slot_time == '07:00PM - 08:00PM' ? 'selected' : ''}} value="07:00PM - 08:00PM">07:00PM - 08:00PM</option>
+                    <option  {{ $booking->slot_time == '08:00PM - 09:00PM' ? 'selected' : ''}} value="08:00PM - 09:00PM">08:00PM - 09:00PM</option>
                  
                 </select>
                     </div>
@@ -102,7 +103,7 @@
                         <select name="location_id" id="location_id" class="form-control with-icon" required>
                             <option>Choose Location</option>
                             @foreach ($locations as $location)
-                            <option value="{{ $location->id}}">
+                            <option  {{ $location->id == $booking->location_id ? 'selected' : ''}} value="{{ $location->id}}">
                                 {{ $location->name}}</option>
                                 
                             @endforeach
@@ -121,7 +122,7 @@
                          <select class="form-control choose_time" name="package" id="package" required>
                              <option >Choose your Service station</option>
                              @foreach ($packages as  $package)
-                             <option value="{{$package->id}}">{{$package->name}} </option>
+                             <option {{$package->id == $booking->package_id ? 'selected' : ''}} value="{{$package->id}}">{{$package->name}} </option>
                              @endforeach
 
                           </select>
@@ -251,8 +252,8 @@ var messagebox = $('#messagebox').hide();
 		if(start_date!="" && start_time!="" && package!="" && type!="" && location_id!=""){
 			$.ajax({
 
-				url: "/user/booking",
-				type: "POST",
+				url: "{{ route('booking.update',$booking->id)}}",
+				type: "PUT",
 
 				data: {
 					start_date: start_date,
@@ -265,6 +266,9 @@ var messagebox = $('#messagebox').hide();
 				cache: false,
 
 				success: function(dataResult,responseText,xhr){
+
+
+                    alert(dataResult);
                     console.log(dataResult);
                     $("#butsave").removeAttr("disabled");
                   //  alert('ajax post');
@@ -329,6 +333,13 @@ $.ajaxSetup({
     }
 });
   
+var option =  $('.option');
+$.get("{{ route('ajaxRequest.car.id',$booking->price_id) }}", function(data, status){
+     var data = data.success;
+    // alert(data.id);
+      option.append('<option selected id=' + data.id + ' value=' + data.id + '>' + data.name + '</option>');
+
+});
 
 $.getJSON("/user/holiday", function(data, status){
     

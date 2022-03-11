@@ -104,13 +104,13 @@ git push -u origin main --}}
 					<a href="javascript:;" class="has-arrow">
 						<div class="parent-icon"><i class="bx bx-category"></i>
 						</div>
-						<div class="menu-title">Categories</div>
+						<div class="menu-title">Sub Category</div>
 					</a>
 					<ul>
-						<li> <a href="{{ route('admin.category.create')}}">
+						<li> <a href="{{ route('admin.sub.category.create')}}">
                             <i class="bx bx-right-arrow-alt"></i>Add New</a>
 						</li>
-                        <li> <a href="{{ route('admin.category.index')}}">
+                        <li> <a href="{{ route('admin.sub.category.index')}}">
                             <i class="bx bx-right-arrow-alt"></i>List</a>
 						</li>
 
@@ -148,6 +148,40 @@ git push -u origin main --}}
                             <i class="bx bx-right-arrow-alt"></i>Add New</a>
 						</li> --}}
                         <li> <a href="{{ route('admin.booking.index')}}">
+                            <i class="bx bx-right-arrow-alt"></i>List</a>
+						</li>
+
+					</ul>
+				</li>
+
+				<li>
+					<a href="javascript:;" class="has-arrow">
+						<div class="parent-icon"><i class="bx bx-category"></i>
+						</div>
+						<div class="menu-title">Feedbacks</div>
+					</a>
+					<ul>
+						{{-- <li> <a href="{{ route('admin.category.create')}}">
+                            <i class="bx bx-right-arrow-alt"></i>Add New</a>
+						</li> --}}
+                        <li> <a href="{{ route('admin.feedbacks.index')}}">
+                            <i class="bx bx-right-arrow-alt"></i>List</a>
+						</li>
+
+					</ul>
+				</li>
+
+				<li>
+					<a href="javascript:;" class="has-arrow">
+						<div class="parent-icon"><i class="bx bx-category"></i>
+						</div>
+						<div class="menu-title">Holidays</div>
+					</a>
+					<ul>
+						{{-- <li> <a href="{{ route('admin.category.create')}}">
+                            <i class="bx bx-right-arrow-alt"></i>Add New</a>
+						</li> --}}
+                        <li> <a href="{{ route('admin.holiday.calender')}}">
                             <i class="bx bx-right-arrow-alt"></i>List</a>
 						</li>
 
@@ -548,7 +582,11 @@ git push -u origin main --}}
 		<!--Start Back To Top Button--> <a href="javaScript:;" class="back-to-top"><i class='bx bxs-up-arrow-alt'></i></a>
 		<!--End Back To Top Button-->
 		<footer class="page-footer">
-			<p class="mb-0">Copyright © 2021. All right reserved.</p>
+
+			
+
+			 {{-- {{ (request()->segment(2) )}} --}}
+			<p class="mb-0">Copyright ©  {{ date('Y')}}. All right reserved.</p>
 		</footer>
 	</div>
 	<!--end wrapper-->
@@ -649,7 +687,14 @@ git push -u origin main --}}
 	</div> --}}
     <script src="{{ asset('backend/js/bootstrap.bundle.min.js')}}"></script>
 	<!--plugins-->
-	{{-- <script src="{{ asset('backend/js/jquery.min.js')}}"></script> --}}
+
+	@if ((request()->segment(2) =='holiday-calender'))
+
+	@else
+	<script src="{{ asset('backend/js/jquery.min.js')}}"></script>   
+				
+			@endif
+
 	<script src="{{ asset('backend/plugins/simplebar/js/simplebar.min.js')}}"></script>
 	<script src="{{ asset('backend/plugins/metismenu/js/metisMenu.min.js')}}"></script>
 	<script src="{{ asset('backend/plugins/perfect-scrollbar/js/perfect-scrollbar.js')}}"></script>

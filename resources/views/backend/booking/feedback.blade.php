@@ -12,13 +12,13 @@
     <div class="page-content">
         <!--breadcrumb-->
         <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-            <div class="breadcrumb-title pe-3">Booking Details</div>
+            <div class="breadcrumb-title pe-3">Feedback Details</div>
             <div class="ps-3">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0 p-0">
                         <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
                         </li>
-                        <li class="breadcrumb-item active" aria-current="page">Data Table</li>
+                        <li class="breadcrumb-item active" aria-current="page">Feedback Table</li>
                     </ol>
                 </nav>
             </div>
@@ -44,7 +44,7 @@
         </div>
         <!--end breadcrumb-->
 
-        <h6 class="mb-0 text-uppercase">DataTable Import</h6>
+        <h6 class="mb-0 text-uppercase">Feedback Import</h6>
         <hr/>
 
         <div class="card">
@@ -66,12 +66,10 @@
                             <tr>
                                 <th>Name</th>
                               
-                                <th>Date</th>
-                                <th>Time</th>
-                                <th>Package</th>
-                                <th>Price</th>
-                                <th>Location</th>
-                                <th>Update</th>
+                                <th>Reason</th>
+                                <th>Feedback</th>
+                                <th>Status</th>
+                                
                              
 
                             </tr>
@@ -80,26 +78,20 @@
 
 
 
-                            @foreach ($bookings as $book)
+                            @foreach ($feedbacks as $book)
                             <tr>
 
-                                <td> @if  ($book->users()->count())
-                                    {{$book->users->name}}
-                                    @else
-                                  Guest
-                                @endif</td>
-                                <td>{{ $book->slot_date}}</td>
-                                <td>{{ $book->slot_time}}</td>
-                                <td> {{ $book->package->name }}</td>
-                                <td> {{ $book->prices->price }}</td>
-
-                                <td>{{ $book->location->name}}</td>
+                            
+                                <td>{{ $book->user->name}}</td>
+                                <td>{{ $book->reason}}</td>
+                                <td> {{ $book->feedback }}</td>
+                                
 
                                 <td class="myStatus_{{$book->id}}">
-                                @if ($book->status =='pending')
+                                @if ($book->status =='Pending')
                                  <a  type="button" data-toggle="modal" data-target="#exampleModal" class="btn_update" id="{{$book->id}}"> Update</a>
                                  @else 
-                                 <span> Completed</span>                                    
+                                 <span> Active</span>                                    
                                 @endif
                                 </td>
                                 
@@ -127,12 +119,10 @@
                             <tr>
                                 <th>Name</th>
                               
-                                <th>Date</th>
-                                <th>Time</th>
-                                <th>Package</th>
-                                <th>Price</th>
-                                <th>Location</th>
-                                <th>Update</th>
+                                <th>Reason</th>
+                                <th>Feedback</th>
+                                <th>Status</th>
+                               
                             </tr>
                         </tfoot>
                     </table>
@@ -158,8 +148,8 @@
 
                                <input type="hidden" id="id" value="">
                             <select class="form-control validate" id="status">
-                                <option value="complate">Complete</option>
-                                <option value="pending">Pending</option>
+                                <option value="Active">Active</option>
+                                <option value="Pending">Pending</option>
                             </select>
                           </div>
                   
@@ -226,7 +216,7 @@ $.ajaxSetup({
                   var id = $('#id').val();
                   var status = $('#status').val();
 
-                  $.post("/admin/status/update/"+id,
+                  $.post("/admin/status/update_status/"+id,
   {
     id : id,
     status: status,
@@ -242,7 +232,7 @@ $.ajaxSetup({
            
         });
 
-        $('.myStatus_'+id).append("<span>Completed</span>");
+        $('.myStatus_'+id).append("<span>Active</span>");
 
   });
 

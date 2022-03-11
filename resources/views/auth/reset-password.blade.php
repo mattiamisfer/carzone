@@ -1,12 +1,12 @@
 @extends('layouts.app')
+@section('title','Reset Password');
 
 @section('content')
 
-@section('title','Register');
 
 <article class="inner-banner">
     <div class="page-heading">
-      <h4>REGISTER</h4>
+      <h4>Reset Password</h4>
     </div>
     <!--page-heading-->
     <img src="{{ asset('assets/images/insidebanner.jpg')}}" alt="inner banner" class="img-responsive" width="100%"/> </article>
@@ -15,7 +15,7 @@
     <div class="container">
       <ul>
         <li><a href="#">Home</a></li>
-        <li>Register</li>
+        <li>Reset Password</li>
       </ul>
     </div>
   </div>
@@ -27,20 +27,12 @@
         <!-- Sidebar -->
 
         <aside class="col-sm-6 col-md-offset-3 space70">
-          <h5 class="heading space40"><span>Sign Up</span></h5>
-          <form  method="POST" action="{{ route('register') }}" id="form" role="form" class="form ">
+          <h5 class="heading space40"><span>Reset Password</span></h5>
+          <form  method="POST" action="{{ route('password.update') }}" id="form" role="form" class="form ">
             <div class="row">
                 @csrf
-              <div class="col-md-12 space20">
+                <input type="hidden" name="token" value="{{ $token }}">
 
-                <input id="name" placeholder="Name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-
-                @error('name')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
-               </div>
               <div class="col-md-12 space20">
                 <input id="email" placeholder="Email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
 
@@ -77,7 +69,7 @@
             </div>
 
 
-            <button type="submit" class="btn-black"> Sign Up </button>
+            <button type="submit" class="btn-black"> Reset Password</button>
           </form>
         </aside>
         <div class="clearfix"></div>

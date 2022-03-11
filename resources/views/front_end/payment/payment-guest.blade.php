@@ -35,7 +35,7 @@
                                     <textarea name="billing_address" id="" cols="30" rows="3" class="form-control"></textarea>
                                 </div>
 
-                                <input type="hidden" name="merchant_id" value="45990"/>
+                                <input type="hidden" name="merchant_id" value="49008"/>
                                 <input type="hidden" name="order_id" value="{{$order_number}}"/>
                                 <input type="hidden" name="amount" value="{{ $plans->price}}"/>
                                 <input type="hidden" name="currency" value="AED"/>

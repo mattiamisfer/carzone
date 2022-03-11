@@ -41,7 +41,7 @@ class PackageController extends Controller
         $fields = collect([
             [
 
-                'label' => 'Package Name',
+                'label' => 'Service Name',
                 'name' => 'package_name',
                 'icon' => true,
                 'icon_name' => 'box',
@@ -57,7 +57,22 @@ class PackageController extends Controller
                 'icon_name' => 'box',
                 'list' => $categories,
                 'type' => 'select',
-                'validate' =>  true
+                'validate' =>  true,
+                'data' => true,
+
+            ],
+
+            [
+
+                'label' => 'Sub Category Name',
+                'name' => 'sub_category_name',
+                'icon' => true,
+                'icon_name' => 'box',
+                'list' => '',
+                'type' => 'select',
+                'validate' =>  false,
+                'data' => false,
+
 
             ],
             [
@@ -110,7 +125,7 @@ class PackageController extends Controller
         ],
         [
             'input_category_name.required'=> 'Category Name is Required', // custom message
-            'input_package_name.required'=> 'Package Name is Required',
+            'input_package_name.required'=> 'Service Name is Required',
             'input_image.required'=> 'Image is Required',
             'input_content.required'=> 'Content is Required',
            ]
@@ -130,6 +145,7 @@ class PackageController extends Controller
         $package->image =  basename($path);
         $package->content = $request->input_content;
         $package->category_id = $request->input_category_name;
+        $package->subcategory_id = $request->input_sub_category_name;
         if($package->save()) {
 
             // return 2;
@@ -164,10 +180,12 @@ class PackageController extends Controller
      $package = Package::find($id);
 
         $categories = Category::all();
+
+       // return $package;
         $fields = collect([
             [
 
-                'label' => 'Package Name',
+                'label' => 'Service Name',
                 'name' => 'package_name',
                 'icon' => true,
                 'icon_name' => 'box',
@@ -186,6 +204,20 @@ class PackageController extends Controller
                 'type' => 'select',
                 'validate' =>  true,
                 'value' => $package->category_id,
+                'data' => true,
+
+            ],
+
+            [
+
+                'label' => 'Sub Category Name',
+                'name' => 'sub_category_name',
+                'icon' => true,
+                'icon_name' => 'box',
+                'list' => '',
+                'type' => 'select',
+                'validate' =>  false,
+                'data' => false,
 
             ],
             [
@@ -218,7 +250,7 @@ class PackageController extends Controller
           );
 
 
-        return view('backend.package.edit',compact('fields','package'));
+        return view('backend.package.edit',compact('fields','package','categories'));
     }
 
     /**
@@ -255,6 +287,8 @@ class PackageController extends Controller
         $package->image = $file;
         $package->content = $request->input_content;
         $package->category_id = $request->input_category_name;
+        $package->subcategory_id = $request->input_sub_category_name;
+
         if($package->save()) {
 
             // return 2;
@@ -276,7 +310,7 @@ class PackageController extends Controller
 
 
         $package = Package::find($id);
-        Storage::disk('s3')->delete('images/'.$package->image);
+      //  Storage::disk('s3')->delete('images/'.$package->image);
         if($package->delete()) {
 
             // return 2;

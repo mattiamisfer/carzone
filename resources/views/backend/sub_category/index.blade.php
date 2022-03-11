@@ -21,7 +21,7 @@
             </div>
             <div class="ms-auto">
                 <div class="btn-group">
-                    <a href="{{ route('admin.sub.category.index')}}" class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+                    <a href="{{ route('admin.sub.category.create')}}" class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
                         <div class="font-22 text-primary">	<i class="fadeIn animated bx bx-plus"></i>
                         </div>
                         <div class="ms-4">Add New</div>

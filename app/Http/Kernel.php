@@ -65,6 +65,7 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'user'  => \App\Http\Middleware\UserAuthenticated::class,
         'admin' => \App\Http\Middleware\AdminAuthenticated​::class,
+        'disable_back_btn' => \App\Http\Middleware\DisableBackBtn::class,
 
     ];
 }
